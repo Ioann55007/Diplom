@@ -1,0 +1,220 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="11">
+            <item index="0" class="java.lang.String" itemvalue="static" />
+            <item index="1" class="java.lang.String" itemvalue="name" />
+            <item index="2" class="java.lang.String" itemvalue="method" />
+            <item index="3" class="java.lang.String" itemvalue="action" />
+            <item index="4" class="java.lang.String" itemvalue="current_language" />
+            <item index="5" class="java.lang.String" itemvalue="," />
+            <item index="6" class="java.lang.String" itemvalue="{{form.as_p}}" />
+            <item index="7" class="java.lang.String" itemvalue="csrf_token" />
+            <item index="8" class="java.lang.String" itemvalue="actions" />
+            <item index="9" class="java.lang.String" itemvalue="text-indent" />
+            <item index="10" class="java.lang.String" itemvalue="href" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="16">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="form" />
+            <item index="7" class="java.lang.String" itemvalue="button" />
+            <item index="8" class="java.lang.String" itemvalue="a" />
+            <item index="9" class="java.lang.String" itemvalue="div" />
+            <item index="10" class="java.lang.String" itemvalue="object_or_url" />
+            <item index="11" class="java.lang.String" itemvalue="li" />
+            <item index="12" class="java.lang.String" itemvalue="option" />
+            <item index="13" class="java.lang.String" itemvalue="h2" />
+            <item index="14" class="java.lang.String" itemvalue="h3" />
+            <item index="15" class="java.lang.String" itemvalue="h4" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="4">
+            <item index="0" class="java.lang.String" itemvalue="pyjwt" />
+            <item index="1" class="java.lang.String" itemvalue="django" />
+            <item index="2" class="java.lang.String" itemvalue="fastapi" />
+            <item index="3" class="java.lang.String" itemvalue="sqlalchemy" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E303" />
+          <option value="E501" />
+          <option value="E502" />
+          <option value="E731" />
+          <option value="E741" />
+          <option value="E127" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+          <option value="N801" />
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyShadowingBuiltinsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredNames">
+        <list>
+          <option value="next" />
+          <option value="id" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="django.core.serializers.ModelSerializer" />
+          <option value="programming_project.forum.models.Topic.objects" />
+          <option value="programming_project.forum.models.Topic.published" />
+          <option value="rest_framework.serializers.TopicUnSerializer" />
+          <option value="django.core.serializers.CharField" />
+          <option value="programming_project.forum.models.Topic.get_name" />
+          <option value="new_projects.programming_project.forum.models.Topic.objects" />
+          <option value="new_projects.programming_project.forum.views.ByCategory.object" />
+          <option value="new_projects.programming_project.forum.models.Category.objects" />
+          <option value="django.template.context.get" />
+          <option value="type.without_ui" />
+          <option value="type.with_ui" />
+          <option value="rest_framework.filters.FilterSet" />
+          <option value="rest_framework.filters.BaseInFilter" />
+          <option value="rest_framework.filters.CharFilter" />
+          <option value="new_projects.programming_project.forum.models.Topic.get_slug" />
+          <option value="django.template.library.Library.assignment_tag" />
+          <option value="new_projects.programming_project.forum.models.User.objects" />
+          <option value="taggit.models.Tag.objects" />
+          <option value="new_projects.programming_project.forum.templatetags.tagnag.forum" />
+          <option value="new_projects.programming_project.forum.services.BlogService.is_article_slug_exist" />
+          <option value="new_projects.programming_project.forum.views.MyMainAppp" />
+          <option value="new_projects.programming_project.forum.views.new_projects" />
+          <option value="programming_project" />
+          <option value="new_projects.programming_project.forum.views.main" />
+          <option value="site.settings" />
+          <option value="new_projects.programming_project.forum.views.main_site" />
+          <option value="new_projects.programming_project.forum.views.ioann" />
+          <option value="new_projects.programming_project.forum.views.etag_str" />
+          <option value="new_projects.programming_project.forum.models.UserTopicRelation.objects" />
+          <option value="new_projects.programming_project.forum.views.topic_like" />
+          <option value="new_projects.programming_project.forum.models.TopicLikes.objects" />
+          <option value="new_projects.programming_project.forum.models.TopLikes.objects" />
+          <option value="django.contrib.contenttypes.fields.GenericRelation.count" />
+          <option value="new_projects.programming_project.forum.models.Like.objects" />
+          <option value="new_projects.programming_project.forum.models.RelationLike.objects" />
+          <option value="django.db.models.fields.related.ManyToManyField.count" />
+          <option value="new_projects.programming_project.forum.views.TopicDetailView.META" />
+          <option value="django.db.models.fields.related.ManyToManyField.all" />
+          <option value="new_projects.new_projects.programming_project.registration_App.utils.user" />
+          <option value="random.random.randint" />
+          <option value="random.random.seed" />
+          <option value="profile.Profile.objects" />
+          <option value="new_projects.new_projects.programming_project.registration_App.views.activation" />
+          <option value="new_projects.new_projects.programming_project.user_profile.models.UserProfile.get_user_profile" />
+          <option value="new_projects.new_projects.programming_project.user_profile.models.UserProfile.objects" />
+          <option value="new_projects.new_projects.programming_project.user_profile.models.Profile.objects" />
+          <option value="new_projects.new_projects.programming_project.user_profile.models.profile" />
+          <option value="requests.instance" />
+          <option value="django.db.models.fields.related.OneToOneField.username" />
+          <option value="profile.avatar" />
+          <option value="django.db.models.fields.related.OneToOneField.create" />
+          <option value="new_projects.new_projects.programming_project.user_profile.models._" />
+          <option value="new_projects.programming_project.main_site.settings.HOST" />
+          <option value="django.db.models.fields.files.ImageField.url" />
+          <option value="choices.ArticleStatus" />
+          <option value="django.db.models.fields.files.ImageField.delete" />
+          <option value="django.db.models.fields.related.OneToOneField.full_name" />
+          <option value="new_projects.new_projects.programming_project.user_profile.services.UserProfileService.get_user_profile" />
+          <option value="new_projects.new_projects.programming_project.profile_user.models.Profile.objects" />
+          <option value="new_projects.new_projects.programming_project.profile_user.models.Profile.split" />
+          <option value="new_projects.new_projects.programming_project.profile_user.views.Avatar.request" />
+          <option value="new_projects.new_projects.programming_project.profile_user.models.Profile.user_id" />
+          <option value="django.db.models.Foreignkey" />
+          <option value="new_projects.new_projects.programming_project.forum.models.Topic.newmanager" />
+          <option value="new_projects.new_projects.programming_project.forum.models.Topic.filter" />
+          <option value="new_projects.new_projects.programming_project.forum.models.Bookmark.objects" />
+          <option value="new_projects.new_projects.programming_project.forum.views.List.bookmark" />
+          <option value="new_projects.new_projects.programming_project.forum.views.List.user" />
+          <option value="new_projects.new_projects.programming_project.forum.views.TopicBookmark.topic" />
+          <option value="django.db.models.fields.DateField.strftime" />
+          <option value="new_projects.new_projects.programming_project.forum.models.User.createdAt" />
+          <option value="django.contrib.auth.models.User.topic_bookmark" />
+          <option value="new_projects.new_projects.programming_project.forum.views.FavouriteView.topic" />
+          <option value="new_projects.new_projects.programming_project.forum.views.FavouriteView.topic_bookmark" />
+          <option value="new_projects.new_projects.programming_project.registration_App.views.email" />
+          <option value="requests.post.save" />
+          <option value="new_projects.new_projects.programming_project.forum.views.forum" />
+          <option value="django.db.models.fields.DateTimeField.*" />
+          <option value="new_projects.new_projects.programming_project.forum.models.Topic.topic" />
+          <option value="new_projects.new_projects.programming_project.forum.models.birthday" />
+          <option value="datetime.strptime" />
+          <option value="django.db.models.fields.related.ForeignKey.count" />
+          <option value="new_projects.new_projects.programming_project.create_topicApp.utils.ObjectCreateMixin.model_form" />
+          <option value="django.db.models.fields.related.ManyToManyField.through" />
+          <option value="base_part.element_one.models.babychild" />
+          <option value="str.__neg__" />
+          <option value="enum.Enum.choices" />
+          <option value="base_part.element_one.models.Leam.JUNIOR" />
+          <option value="base_part.element_one.models.Leam.ASISTANT" />
+          <option value="base_part.element_one.models.ManyMotheland.m2mfield" />
+          <option value="django.db.models.base.Model.m2mfield" />
+          <option value="base_part.element_one.models.Leam.Junior" />
+          <option value="object.form_invalid" />
+          <option value="base_part.element_one.views.JsonableResponseMixin.request" />
+          <option value="object.form_valid" />
+          <option value="base_part.element_one.views.JsonableResponseMixin.object" />
+          <option value="base_part.element_one.views.AuthorInterestFormView.pk" />
+          <option value="base_part.element_one.models.Logo.objects" />
+          <option value="django.http.request.user" />
+          <option value="urllib.request.user" />
+          <option value="super.get_form_kwargs" />
+          <option value="Home_Work_Python.one_home.typle" />
+          <option value="_dict_values.__add__" />
+          <option value="base_part.second_app.forms.get_country_from_coordinates" />
+          <option value="base_part.second_app.serializers.queryset" />
+          <option value="django.contrib.sites.requests.get" />
+          <option value="new_projects.new_projects.programming_project.profile_user.views.forum" />
+          <option value="new_projects.new_projects.programming_project.forum.views.CountViewerMixin.object" />
+          <option value="object.get" />
+          <option value="new_projects.new_projects.programming_project.forum.views.ByCategory.object" />
+          <option value="new_projects.new_projects.programming_project.forum.views.ReplyDetailView.POST" />
+          <option value="new_projects.new_projects.programming_project.forum.views.ReplyDetailView.user" />
+          <option value="new_projects.new_projects.programming_project.forum.views.ReplyDetailView.method" />
+          <option value="new_projects.new_projects.programming_project.forum.views.CountViewerMixin.META" />
+          <option value="new_projects.new_projects.programming_project.create_topicApp.forms.forum" />
+          <option value="new_projects.new_projects.programming_project.create_topicApp.models.Category" />
+          <option value="new_projects.new_projects.programming_project.forum.views.Search.method" />
+          <option value="new_projects.new_projects.programming_project.forum.views.Search.user" />
+          <option value="new_projects.new_projects.programming_project.forum.views.Search.POST" />
+          <option value="new_projects.new_projects.programming_project.forum.models.Topic.published" />
+          <option value="picture_site.picture_site.urls.main_site" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="XmlDuplicatedId" enabled="false" level="ERROR" enabled_by_default="false" />
+  </profile>
+</component>
