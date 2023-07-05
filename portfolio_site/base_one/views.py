@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 
-def base(request):
-    return render(request, 'base.html')
+def error_page(request):
+    return render(request, '404.html')

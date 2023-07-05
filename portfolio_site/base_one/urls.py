@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.base, name='base')
+    path('not_found/', views.error_page, name='error_page')
 ]
