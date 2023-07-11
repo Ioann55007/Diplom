@@ -1,0 +1,73 @@
+{% load static %}
+{% block content %}
+
+
+<form method="post" action="phpmailer/reserve_template_email.php" id="bookingform" autocomplete="off">
+                            <div class="booking_wrapper">
+                                <p id="daterangepicker-result" class="d-none"></p>
+                                <input type="hidden" id="date_booking" name="date_booking">
+                                <div id="daterangepicker-embedded-container" class="embedded-daterangepicker clearfix mb-4"></div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="custom_select">
+                                            <select class="wide" name="rooms_booking" id="rooms_booking">
+                                                <option value="">Select Room</option>
+                                                <option value="Double Room">Double Room</option>
+                                                <option value="Deluxe Room">Deluxe Room</option>
+                                                <option value="Superior Room">Superior Room</option>
+                                                <option value="Junior Suite">Junior Suite</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="qty-buttons mb-3 version_2">
+                                                    <input type="button" value="+" class="qtyplus" name="adults_booking">
+                                                    <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
+                                                    <input type="button" value="-" class="qtyminus" name="adults_booking">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="mb-3 qty-buttons mb-3 version_2">
+                                                    <input type="button" value="+" class="qtyplus" name="childs_booking">
+                                                    <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
+                                                    <input type="button" value="-" class="qtyminus" name="childs_booking">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / row -->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" name="name_booking" id="name_booking" class="form-control" placeholder="Name and Last Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="email" name="email_booking" id="email_booking" class="form-control" placeholder="Email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / row -->
+                                <hr>
+                                <div class="pb-4">
+                                    <div class="row align-items-center justify-content-end">
+                                        <div class="col-auto">
+                                            <label for="verify_booking" class="col-form-label"><strong>Are you human?</strong></label>
+                                        </div>
+                                        <div class="col-md-2 col-4">
+                                            <input type="text" name="verify_booking" id="verify_booking" class="form-control" placeholder="3 + 1 = ?">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / row -->
+                            </div>
+                            <!-- / booking_wrapper -->
+                            <p class="text-end mt-4"><input class="btn_1 outline" type="submit" value="Check Now" id="submit-booking"></p>
+                        </form>
+
+
+{% endblock %}
