@@ -95,7 +95,7 @@
                     <div class="col-lg-5">
                         <div class="parallax_wrapper">
                             <img src="{% static 'img/home_2.jpg' %}" alt="" class="img-fluid rounded-img">
-                            <div data-cue="slideInUp" class="img_over"><span data-jarallax-element="-30"><img src="img/home_1.jpg" alt="" class="rounded-img"></span></div>
+                            <div data-cue="slideInUp" class="img_over"><span data-jarallax-element="-30"><img src="{% static 'img/home_1.jpg' %}" alt="" class="rounded-img"></span></div>
                         </div>
                     </div>
                     <div class="col-lg-5">
@@ -124,7 +124,7 @@
                 <div class="item" data-cues="slideInUp" data-delay="300">
                     <a href="room-details.html" class="box_cat_rooms">
                         <figure>
-                            <div class="background-image" data-background="url(img/rooms/1.jpg)"></div>
+                            <div class="background-image" data-background="url({% static 'img/rooms/1.jpg' %})"></div>
                             <div class="info">
                                 <small>From $150/night</small>
                                 <h3>Double Room</h3>
@@ -137,7 +137,7 @@
                 <div class="item" data-cues="slideInUp" data-delay="400">
                     <a href="room-details.html" class="box_cat_rooms">
                         <figure>
-                            <div class="background-image" data-background="url(img/rooms/2.jpg)"></div>
+                            <div class="background-image" data-background="url({% static 'img/rooms/2.jpg' %})"></div>
                             <div class="info">
                                 <small>From $190/night</small>
                                 <h3>Deluxe Room</h3>
@@ -150,7 +150,7 @@
                 <div class="item" data-cues="slideInUp" data-delay="500">
                     <a href="room-details.html" class="box_cat_rooms">
                         <figure>
-                            <div class="background-image" data-background="url(img/rooms/3.jpg)"></div>
+                            <div class="background-image" data-background="url({% static 'img/rooms/3.jpg' %})"></div>
                             <div class="info">
                                 <small>From $240/night</small>
                                 <h3>Superior Room</h3>

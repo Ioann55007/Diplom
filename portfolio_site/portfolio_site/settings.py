@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base_one.apps.PartOneConfig',
     'part_post.apps.PartSecondConfig',
+    'part_room.apps.PartRoomConfig',
+
 ]
 
 MIDDLEWARE = [

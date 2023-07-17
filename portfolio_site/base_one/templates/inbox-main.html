@@ -2,7 +2,7 @@
 {% block content %}
 
 <main>
-        <div class="hero full-height jarallax" data-jarallax-video="mp4:./video/sunset.mp4,webm:./video/sunset.webm,ogv:./video/sunset.ogv" data-speed="0.2">
+        <div class="hero full-height jarallax" data-jarallax-video="{% static 'mp4:./video/sunset.mp4,webm:./video/sunset.webm,ogv:./video/sunset.ogv' %}" data-speed="0.2">
             <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                 <div class="container">
                     <small class="slide-animated one">Luxury Hotel Experience</small>
@@ -55,7 +55,7 @@
                     <div class="col-lg-5">
                         <div class="parallax_wrapper">
                             <img src="{% static 'img/home_2.jpg' %}" alt="" class="img-fluid rounded-img">
-                            <div data-cue="slideInUp" class="img_over"><span data-jarallax-element="-30"><img src="img/home_1.jpg" alt="" class="rounded-img"></span></div>
+                            <div data-cue="slideInUp" class="img_over"><span data-jarallax-element="-30"><img src="{% static 'img/home_1.jpg' %}" alt="" class="rounded-img"></span></div>
                         </div>
                     </div>
                     <div class="col-lg-5">
@@ -101,7 +101,7 @@
                 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
                     <a href="room-details.html" class="box_cat_rooms">
                         <figure>
-                            <div class="background-image" data-background="url(img/rooms/1.jpg)"></div>
+                            <div class="background-image" data-background="url({% static 'img/rooms/1.jpg' %})"></div>
                             <div class="info">
                                 <small>From $250/night</small>
                                 <h3>Junior Suite</h3>
@@ -113,7 +113,7 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                     <a href="room-details.html" class="box_cat_rooms">
                         <figure>
-                            <div class="background-image" data-background="url(img/rooms/2.jpg)"></div>
+                            <div class="background-image" data-background="url({% static img/rooms/2.jpg' %)"></div>
                             <div class="info">
                                 <small>From $190/night</small>
                                 <h3>Deluxe Room</h3>
@@ -125,7 +125,7 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                     <a href="room-details.html" class="box_cat_rooms">
                         <figure>
-                            <div class="background-image" data-background="url(img/rooms/3.jpg)"></div>
+                            <div class="background-image" data-background="url({% static 'img/rooms/3.jpg' %})"></div>
                             <div class="info">
                                 <small>From $240/night</small>
                                 <h3>Superior Room</h3>
@@ -227,7 +227,9 @@
         <!-- /bg_white -->
 
         <div class="parallax_section_1 jarallax" data-jarallax data-speed="0.2">
-            <img class="jarallax-img kenburns-2" src="{% static 'img/hero_home_1.jpg' %}" alt="">
+            <img class="jarallax-img kenburns-2" src="{%
+
+            static 'img/hero_home_1.jpg' %}" alt="">
             <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -305,7 +307,7 @@
                     </div>
                     <div class="item col-xl-4 col-lg-6">
                         <a href="news-post.html" class="box_contents" data-cue="slideInUp" data-delay="400">
-                            <figure><img src="img/blog-3.jpg" alt="" class="img-fluid"><em>24 Dec</em></figure>
+                            <figure><img src="{% static 'img/blog-3.jpg' %}" alt="" class="img-fluid"><em>24 Dec</em></figure>
                             <div class="wrapper">
                                 <small>Event<span></span></small>
                                 <h2>Yayoi Kusama: Infinity Mirror Rooms at Tate Modern</h2>

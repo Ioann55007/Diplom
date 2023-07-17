@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base_one.urls')),
     # path('', include('part_post.urls')),
+    # path('', include('part_room.urls')),
 ]
 
 

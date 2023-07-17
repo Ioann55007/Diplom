@@ -1,13 +1,12 @@
-{% extends 'index.html' %}
 {% load static %}
 {% block content %}
-
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>PARADISE - Hotel and Bed&Breakfast Site Template</title>
 
     <!-- Favicons-->
@@ -62,4 +61,10 @@
             </div>
         </div><!-- /container -->
     </header><!-- /Header -->
+<!-- COMMON SCRIPTS -->
+<script src="{% static 'js/common_scripts.js' %}"></script>
+<script src="{% static 'js/common_functions.js' %}"></script>
+<script src="{% static 'js/datepicker_inline.js' %}"></script>
+<script src="{% static 'phpmailer/validate.js' %}"></script>
+<script src="{% static 'js/slider.js' %}"></script>
 {% endblock %}
