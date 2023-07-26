@@ -1,10 +1,8 @@
-{% extends 'index.html' %}
+{% load static %}
 {% block content %}
-<body>
-    <!-- /nav_panel -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% include 'static_html/header-2.html' %}
 
-
- 
     <main>
       <div class="hero small-height jarallax" data-jarallax data-speed="0.2">
           <img class="jarallax-img" src="{% static 'img/hero_home_1.jpg' %}" alt="">
@@ -22,7 +20,7 @@
               <div class="col-lg-5">
                   <div class="parallax_wrapper inverted">
                       <img src="{% static 'img/about_1.jpg' %}" alt="" class="img-fluid rounded-img">
-                      <div data-cue="slideInUp" class="img_over"><span data-jarallax-element="-30"><img src="img/home_1.jpg" alt="" class="rounded-img"></span></div>
+                      <div data-cue="slideInUp" class="img_over"><span data-jarallax-element="-30"><img src="{% static 'img/home_1.jpg' %}" alt="" class="rounded-img"></span></div>
                   </div>
               </div>
               <div class="col-lg-5">
@@ -272,7 +270,7 @@
       <!-- /container -->
 
   </main>
-
+{% include 'static_html/footer.html' %}
     <!-- /footer -->
 
     <div class="progress-wrap">
@@ -287,5 +285,4 @@
 <script src="{% static 'js/common_functions.js' %}"></script>
 <script src="{% static 'phpmailer/validate.js' %}"></script>
 
-</body>
 {% endblock %}

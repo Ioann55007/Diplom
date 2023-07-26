@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from django.views.generic import TemplateView
 
 
 def error_page(request):
@@ -13,11 +14,25 @@ class BaseView(View):
         return render(request, self.template_name)
 
 
+class IndexTwo(TemplateView):
+    template_name = "index-2.html"
 
 
-class HeadView(View):
-    template_name = 'static_html/header.html'
+class AboutView(TemplateView):
+    template_name = "about.html"
 
-    def get(self, request):
-        return render(request, self.template_name)
 
+class FlexSliderView(TemplateView):
+    template_name = "index-3.html"
+
+
+class YouVim(TemplateView):
+    template_name = 'index-4.html'
+
+
+class Hom_ParalView(TemplateView):
+    template_name = 'index-5.html'
+
+
+class NewsOneView(TemplateView):
+    template_name = 'news-1.html'
