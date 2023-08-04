@@ -1,8 +1,9 @@
 
 {%  load static %}
 {% block content %}
+{% include 'static_html/head.html' %}
 {% include 'static_html/header.html' %}
-{% include 'news_1_nav.html' %}
+{% include 'static_html/nav-panel.html' %}
 
     <main>
         <div class="hero medium-height jarallax" data-jarallax data-speed="0.2">
@@ -126,13 +127,13 @@
                     <div class="col-xl-8">
                         <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
                             <div class="item">
-                                <a data-fslightbox="gallery_3" data-type="image" href="{% static 'img/rooms/3.jpg' %}"><img src="img/rooms/3.jpg" alt=""></a>
+                                <a data-fslightbox="gallery_3" data-type="image" href="{% static 'img/rooms/3.jpg' %}"><img src="{% static 'img/rooms/3.jpg' %}" alt=""></a>
                             </div>
                             <div class="item">
-                                <a data-fslightbox="gallery_3" data-type="image" href="img/rooms/opt_3.jpg"><img src="{% static 'img/rooms/opt_3.jpg' %}" alt=""></a>
+                                <a data-fslightbox="gallery_3" data-type="image" href="{% static 'img/rooms/opt_3.jpg' %}"><img src="{% static 'img/rooms/opt_3.jpg' %}" alt=""></a>
                             </div>
                             <div class="item">
-                                <a data-fslightbox="gallery_3" data-type="image" href="img/rooms/opt_6.jpg"><img src="{% static 'img/rooms/opt_6.jpg' %}" alt=""></a>
+                                <a data-fslightbox="gallery_3" data-type="image" href="{% static 'img/rooms/opt_6.jpg' %}"><img src="{% static 'img/rooms/opt_6.jpg' %}" alt=""></a>
                             </div>
                         </div>
                         <!-- /carousel -->
@@ -178,13 +179,13 @@
                     <div class="col-xl-8 order-xl-2">
                         <div class="owl-carousel owl-theme carousel_item_1 kenburns rounded-img">
                             <div class="item">
-                                <a data-fslightbox="gallery_4" data-type="image" href="img/rooms/4.jpg"><img src="img/rooms/4.jpg" alt=""></a>
+                                <a data-fslightbox="gallery_4" data-type="image" href="{% static 'img/rooms/4.jpg' %}"><img src="{% static 'img/rooms/4.jpg' %}" alt=""></a>
                             </div>
                             <div class="item">
-                                <a data-fslightbox="gallery_4" data-type="image" href="img/rooms/opt_4.jpg"><img src="img/rooms/opt_4.jpg" alt=""></a>
+                                <a data-fslightbox="gallery_4" data-type="image" href="{% static 'img/rooms/opt_4.jpg' %}"><img src="{% static 'img/rooms/opt_4.jpg' %}" alt=""></a>
                             </div>
                             <div class="item">
-                                <a data-fslightbox="gallery_4" data-type="image" href="img/rooms/opt_7.jpg"><img src="img/rooms/opt_7.jpg" alt=""></a>
+                                <a data-fslightbox="gallery_4" data-type="image" href="{% static 'img/rooms/opt_7.jpg' %}"><img src="{% static 'img/rooms/opt_7.jpg' %}" alt=""></a>
                             </div>
                         </div>
                         <!-- /carousel -->
@@ -231,9 +232,9 @@
         <div class="pinned-image pinned-image--medium">
             <div class="pinned-image__container" id="section_video">
                 <video loop="loop" muted="muted" id="video_home">
-                    <source src="video/sunset.mp4" type="video/mp4">
-                    <source src="video/sunset.webm" type="video/webm">
-                    <source src="video/sunset.ogv" type="video/ogg">
+                    <source src="{% static 'video/sunset.mp4' %}" type="video/mp4">
+                    <source src="{% static 'video/sunset.webm' %}" type="video/webm">
+                    <source src="{% static 'video/sunset.ogv' %}" type="video/ogg">
                 </video>
                 <div class="pinned-image__container-overlay"></div>
             </div>

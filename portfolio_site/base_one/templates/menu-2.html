@@ -1,5 +1,7 @@
 {% load static %}
 {% block content %}
+{% include 'static_html/head.html' %}
+
 {% include 'static_html/header.html' %}
 
     <div class="panel_menu">
@@ -14,7 +16,7 @@
                                         <div class="container-item">
                                             <a href="index.html" class="link">Home</a>
                                             <div class="image">
-                                                <img src="img/hero_home_1.jpg" alt="">
+                                                <img src="{% static 'img/hero_home_1.jpg' %}" alt="">
                                             </div>
                                         </div>
                                     </li>
@@ -46,7 +48,7 @@
                                         <div class="container-item">
                                             <a href="contacts.html">Contacts</a>
                                             <div class="image">
-                                                <img src="img/rooms/4.jpg" alt="">
+                                                <img src="{% static 'img/rooms/4.jpg' %}" alt="">
                                             </div>
                                         </div>
                                     </li>
@@ -54,7 +56,7 @@
                                         <div class="container-item">
                                             <a href="#">More demos</a>
                                             <div class="image">
-                                                <img src="img/rooms/opt_7.jpg" alt="">
+                                                <img src="{% static 'img/rooms/opt_7.jpg' %}" alt="">
                                             </div>
                                         </div>
                                     </li>

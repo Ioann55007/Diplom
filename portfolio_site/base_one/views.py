@@ -35,4 +35,4 @@ class Hom_ParalView(TemplateView):
 
 
 class NewsOneView(TemplateView):
-    template_name = 'news-1.html'
+    template_name = 'static_html/news-1.html'

@@ -1,11 +1,11 @@
 
 {%  load static %}
 {% block content %}
+{% include 'static_html/head.html' %}
 {% include 'static_html/header.html' %}
-{% include 'news_1_nav.html' %}
+{% include 'static_html/nav-panel.html' %}
 
 
-    <!-- /nav_panel -->
 
      <main>
 
@@ -134,7 +134,7 @@
 
         <div class="pinned-image pinned-image--medium">
             <div class="pinned-image__container">
-               <img src="img/parallax_bg.jpg" alt="">
+               <img src="{% static 'img/parallax_bg.jpg' %}" alt="">
                 <div class="pinned-image__container-overlay"></div>
             </div>
             <div class="pinned_over_content">

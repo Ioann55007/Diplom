@@ -1,4 +1,6 @@
 from django.urls import path, include
+from django.views.generic import TemplateView
+
 from . import views
 
 
@@ -11,4 +13,10 @@ urlpatterns = [
     path('you-vim', views.YouVim.as_view(), name='you-vim'),
     path('hom-palal', views.Hom_ParalView.as_view(), name='hom-palal'),
     path('news-1', views.NewsOneView.as_view(), name='news-1'),
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('contacts/', TemplateView.as_view(template_name='contacts.html'), name='contacts'),
+    path('menu-2/', TemplateView.as_view(template_name='menu-2.html'), name='menu_2'),
+    path('menu-3/', TemplateView.as_view(template_name='menu-3.html'), name='menu_3'),
+    path('menu-4/', TemplateView.as_view(template_name='menu-4.html'), name='menu_4'),
+
 ]

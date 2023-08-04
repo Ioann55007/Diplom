@@ -1,5 +1,5 @@
 """
-URL configuration for portfolio_site project.
+URL configuration for base_site project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base_one.urls')),
     # path('', include('part_post.urls')),
-    # path('', include('part_room.urls')),
+    path('', include('part_room.urls')),
 ]
 
 
