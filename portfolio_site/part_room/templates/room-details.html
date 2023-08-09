@@ -1,19 +1,20 @@
 {%  load static %}
 {% block content %}
+{% include 'static_html/head.html' %}
 {% include 'static_html/header.html' %}
-{% include 'news_1_nav.html' %}
+{% include 'static_html/nav-panel.html' %}
     <!-- /nav_panel -->
  
     <main>
 
         <div class="hero full-height jarallax" data-jarallax data-speed="0.2">
-            <img class="jarallax-img kenburns" src="{% static 'img/rooms/1.jpg' %}" alt="">
+            <img class="jarallax-img kenburns" src="{{ room.room_photo.url }}" alt="">
             <div class="wrapper opacity-mask d-flex align-items-center  text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <small class="slide-animated one">Luxury Hotel Experience</small>
-                            <h1 class="slide-animated two">Sierra Double Room</h1>
+                            <h1 class="slide-animated two">{{ room.name_room }}</h1>
                             <p class="slide-animated three">Exquisite furnishings for a cosy ambience</p>
                         </div>
                     </div>
@@ -36,8 +37,7 @@
                             <small>Luxury Experience</small>
                             <h2>A deeply space that invites you to truly Switch Off.</h2>
                         </div>
-                        <p>The dark wood panelling and furnishings, deluxe red-draped four-poster bed, and magnificent black stone bathroom evoke the charm of a secluded Sierra Nevada getaway. The intimate scale and finish give the room a distinctly personal feel.</p>
-                        <p>The dark wood panelling and furnishings, deluxe red-draped four-poster bed, and magnificent black stone bathroom evoke the charm.</p>
+                        <p>{{ room.content }}</p>
                     </div>
                     <div class="col-lg-6">
                         <div class="room_facilities_list">
@@ -68,25 +68,11 @@
                 <div data-cues="zoomIn">
                     <div class="owl-carousel owl-theme carousel_item_centered kenburns rounded-img">
                         <div class="item">
-                            <a data-fslightbox="gallery_1" data-type="image" href="{% static 'img/rooms/opt_2.jpg' %}">
-                                <img src="{% static 'img/rooms/opt_5.jpg' %}" alt="">
+                            <a data-fslightbox="gallery_1" data-type="image" href="{{ room.several_image.url }}">
+                                <img src="{{ room.several_image.url }}" alt="">
                             </a>
                         </div>
-                        <div class="item">
-                            <a data-fslightbox="gallery_1" data-type="image" href="{% static 'img/rooms/opt_1.jpg' %}">
-                                <img src="{% static 'img/rooms/opt_1.jpg' %}" alt="">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a data-fslightbox="gallery_1" data-type="image" href="{% static 'img/rooms/opt_2.jpg' %}">
-                                <img src="{% static 'img/rooms/opt_4.jpg' %}" alt="">
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a data-fslightbox="gallery_1" data-type="image" href="{% static 'img/rooms/opt_2.jpg' %}">
-                                <img src="{% static 'img/rooms/opt_6.jpg' %}" alt="">
-                            </a>
-                        </div>
+
                     </div>
                 </div>
             </div>
