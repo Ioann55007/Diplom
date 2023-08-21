@@ -44,7 +44,47 @@ class Room(models.Model):
         return reverse('room-detail', kwargs={'id': self.name_room})
 
 
+class PhotoDetailRoom(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='photo_room', verbose_name='Номер в гостинице')
+    add_photo = models.ImageField(upload_to="image_room/", blank=True, verbose_name='Фото')
 
+    class Meta:
+        verbose_name = 'изображение'
+        verbose_name_plural = 'Изображения'
+
+
+class DoubleRoom(models.Model):
+    objects = models.Manager()
+    price = models.PositiveIntegerField()
+    add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room_double',
+                             verbose_name='Номер в гостинице')
+
+    class Meta:
+        verbose_name = 'изображение Double Room'
+        verbose_name_plural = 'Фото Double Room'
+
+
+class DeluxeRoom(models.Model):
+    objects = models.Manager()
+    price = models.PositiveIntegerField()
+    add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='deluxe_room', verbose_name='Номер в гостинице')
+
+    class Meta:
+        verbose_name = 'изображение Deluxe Room'
+        verbose_name_plural = 'Фото Deluxe Room'
+
+
+
+class SuperiorRoom(models.Model):
+    price = models.PositiveIntegerField()
+    add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='superior_room', verbose_name='Номер в гостинице')
+
+    class Meta:
+        verbose_name = 'изображение Superior Room'
+        verbose_name_plural = 'Фото Superior Room'
 
 
 class Review(models.Model):

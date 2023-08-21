@@ -78,6 +78,22 @@
             </div>
         </div>
         <!-- /bg_white -->
+          <div class="bg_white add_bottom_120">
+            <div class="container-fluid p-lg-0">
+                <div data-cues="zoomIn">
+                    <div class="owl-carousel owl-theme carousel_item_centered kenburns rounded-img">
+                        {% for image_room in room.photo_room.all %}
+                        <div class="item">
+                            <a data-fslightbox="gallery_1" data-type="image" href="{{image_room.add_photo.url}}">
+                                <img src="{{image_room.add_photo.url}}" alt="">
+                            </a>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="container margin_120_95" id="reviews">
             <div class="row justify-content-between">
@@ -168,36 +184,45 @@
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                             <a href="room-list-1.html" class="box_cat_rooms">
                                 <figure>
-                                    <div class="background-image" data-background="url({% static 'img/rooms/1.jpg' %})"></div>
+                                    {% for room in room.room_double.all %}
+
+                                    <div class="background-image" data-background="url({{room.add_photo.url}})"></div>
                                     <div class="info">
-                                        <small>From $150/night</small>
+                                        <small>From ${{room.price}}/night</small>
                                         <h3>Double Room</h3>
                                         <span>Read more</span>
                                     </div>
+                                    {% endfor %}
+
                                 </figure>
                             </a>
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                             <a href="room-list-1.html" class="box_cat_rooms">
                                 <figure>
-                                    <div class="background-image" data-background="url({% static 'img/rooms/2.jpg' %})"></div>
+                                    {% for room in room.deluxe_room.all %}
+
+                                    <div class="background-image" data-background="url({{room.add_photo.url}})"></div>
                                     <div class="info">
-                                        <small>From $190/night</small>
+                                        <small>From ${{room.price}}/night</small>
                                         <h3>Deluxe Room</h3>
                                         <span>Read more</span>
                                     </div>
+                                    {% endfor %}
                                 </figure>
                             </a>
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                             <a href="room-list-1.html" class="box_cat_rooms">
                                 <figure>
-                                    <div class="background-image" data-background="url({% static 'img/rooms/3.jpg' %})"></div>
+                                    {% for room in room.superior_room.all %}
+                                    <div class="background-image" data-background="url({{room.add_photo.url}})"></div>
                                     <div class="info">
                                         <small>From $240/night</small>
                                         <h3>Superior Room</h3>
                                         <span>Read more</span>
                                     </div>
+                                    {% endfor %}
                                 </figure>
                             </a>
                         </div>
