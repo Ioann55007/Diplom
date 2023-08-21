@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'base_one.apps.PartOneConfig',
     'part_post.apps.PartSecondConfig',
     'part_room.apps.PartRoomConfig',
+    'the_profile.apps.TheProfileConfig',
 
 ]
 
@@ -127,3 +128,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTH_USER_MODEL = 'part_room.User'

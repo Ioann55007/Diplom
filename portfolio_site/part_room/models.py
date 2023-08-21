@@ -1,6 +1,33 @@
-from django.contrib.auth.models import User
+from profile import Profile
+
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.utils import timezone
+
+from django.contrib.auth.models import PermissionsMixin, UserManager
+
+from the_profile.models import Profile
+
+
+class User(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(max_length=255, unique=True)
+    first_name = models.CharField(max_length=30, null=True, blank=True)
+    last_name = models.CharField(max_length=30, null=True, blank=True)
+    email = models.EmailField(max_length=255, unique=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    phone = models.CharField(max_length=100)
+    date_joined = models.DateTimeField(u'date joined', default=timezone.now)
+    objects = UserManager()
+    avatar = models.ImageField(settings.AUTH_USER_MODEL, default='/No-Image-Available.jpg', blank=True)
+    USERNAME_FIELD = 'username'
+
+    REQUIRED_FIELDS = ['email', 'password', 'avatar', 'phone']
+
+    def __str__(self):
+        return f"{self.first_name}"
 
 
 class Room(models.Model):
@@ -17,15 +44,12 @@ class Room(models.Model):
         return reverse('room-detail', kwargs={'id': self.name_room})
 
 
-class Images(models.Model):
-  image = models.ImageField(upload_to='')
-  room = models.ForeignKey(Room, related_name="several_image", on_delete=models.CASCADE)
 
 
 
 class Review(models.Model):
     objects = models.Manager()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='review_author')
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='review_author')
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='review_post')
     name_comment = models.CharField(max_length=120)
     created = models.DateTimeField(auto_now_add=True)

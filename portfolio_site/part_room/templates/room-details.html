@@ -35,7 +35,7 @@
                     <div class="col-lg-4">
                         <div class="title">
                             <small>Luxury Experience</small>
-                            <h2>A deeply space that invites you to truly Switch Off.</h2>
+                            <h2>{{ room.name_room }}</h2>
                         </div>
                         <p>{{ room.content }}</p>
                     </div>
@@ -129,16 +129,17 @@
                     <!-- /row -->
                 </div>
                 <div class="col-lg-7 order-lg-1">
+                    {% for review in room.review_post.all %}
                     <div class="review_card">
                         <div class="row">
                             <div class="col-md-2 user_info">
-                                <figure><img src="{% static 'img/avatar4.jpg' %}" alt=""></figure>
-                                <h5>Lukas</h5>
+                                <figure><img src="{{review.author.avatar.url}}" alt=""></figure>
+                                <h5>{{ review.author }}</h5>
                             </div>
                             <div class="col-md-10 review_content">
                                 <div class="clearfix mb-3">
-                                    <span class="rating">8.5<small>/10</small> <strong>Rating average</strong></span>
-                                    <em>Published 54 minutes ago</em>
+                                    <span class="rating">{{ review.rating_average }}<strong>Rating average</strong></span>
+                                    <em>Published {{ review.created }}</em>
                                 </div>
                                 <h4>"Great Location!!"</h4>
                                 <p>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his. Tollit molestie suscipiantur his et.</p>
@@ -147,56 +148,10 @@
                         <!-- /row -->
                     </div>
                     <!-- /review_card -->
-                    <div class="review_card">
-                        <div class="row">
-                            <div class="col-md-2 user_info">
-                                <figure><img src="{% static 'img/avatar6.jpg' %}" alt=""></figure>
-                                <h5>Lukas</h5>
-                            </div>
-                            <div class="col-md-10 review_content">
-                                <div class="clearfix mb-3">
-                                    <span class="rating">8.5<small>/10</small> <strong>Rating average</strong></span>
-                                    <em>Published 10 Oct. 2022</em>
-                                </div>
-                                <h4>"Awesome Experience"</h4>
-                                <p>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his. Tollit molestie suscipiantur his et.</p>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                    </div>
-                    <!-- /review_card -->
-                    <div class="review_card">
-                        <div class="row">
-                            <div class="col-md-2 user_info">
-                                <figure><img src="{% static 'img/avatar1.jpg' %}" alt=""></figure>
-                                <h5>Marika</h5>
-                            </div>
-                            <div class="col-md-10 review_content">
-                                <div class="clearfix mb-3">
-                                    <span class="rating">9.0<small>/10</small> <strong>Rating average</strong></span>
-                                    <em>Published 11 Oct. 2022</em>
-                                </div>
-                                <h4>"Really great dinner!!"</h4>
-                                <p>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his. Tollit molestie suscipiantur his et.</p>
-                            </div>
-                        </div>
-                        <!-- /row -->
-                        <div class="row reply">
-                            <div class="col-md-2 user_info">
-                                <figure><img src="{% static 'img/avatar.jpg' %}" alt=""></figure>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="review_content">
-                                    <strong>Reply from Admin</strong>
-                                    <em>Published 3 minutes ago</em>
-                                    <p><br>Hi Monika,<br><br>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his. Tollit molestie suscipiantur his et.<br><br>Thanks</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /reply -->
-                    </div>
+
                     <!-- /review_card -->
                     <p class="text-end"><a href="#0" class="btn_1">Leave a review</a></p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
