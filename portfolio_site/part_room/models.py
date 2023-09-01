@@ -95,3 +95,12 @@ class Review(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     rating_average = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.author}, {self.room}"
+
+
+
+
+
+

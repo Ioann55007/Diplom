@@ -14,25 +14,19 @@
                         <li><strong><a href="#0">info@Paradisehotel.com</a></strong></li>
                         <li><strong><a href="#0">+434 43242232</a></strong></li>
                     </ul>
-                    <div class="social">
-                        <ul>
-                            <li><a href="#0"><i class="bi bi-instagram"></i></a></li>
-                            <li><a href="#0"><i class="bi bi-whatsapp"></i></a></li>
-                            <li><a href="#0"><i class="bi bi-facebook"></i></a></li>
-                            <li><a href="#0"><i class="bi bi-twitter"></i></a></li>
-                        </ul>
-                    </div>
+                   <div class="ya-share2" data-curtain data-shape="round" data-color-scheme="blackwhite"
+                        data-services="vkontakte,telegram,twitter,whatsapp"></div>
                 </div>
                 <div class="col-lg-3 col-md-6 ms-lg-auto">
                     <h5>Explore</h5>
                     <div class="footer_links">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="room-list-1.html">Rooms &amp; Suites</a></li>
-                            <li><a href="news-1.html">News &amp; Events</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="about.html">Terms and Conditions</a></li>
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'about' %}">About Us</a></li>
+                            <li><a href="{% url 'part_room:rooms_list_one' %}">Rooms &amp; Suites</a></li>
+                            <li><a href="{% url 'news-1' %}">News &amp; Events</a></li>
+                            <li><a href="{% url 'contacts' %}">Contacts</a></li>
+                            <li><a href="{% url 'about' %}">Terms and Conditions</a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,4 +53,5 @@
             </div>
         </div>
     </footer>
+<script src="https://yastatic.net/share2/share.js"></script>
 {% endblock %}

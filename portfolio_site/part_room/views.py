@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from .forms import ReviewForm
-from .models import Room, Review, DoubleRoom, DeluxeRoom
+from .models import Room, Review, DoubleRoom, DeluxeRoom, User
+from the_profile.models import Profile
 
 
 class RoomListView(ListView):
@@ -44,25 +46,48 @@ class DeluxeRoomListView(ListView):
 class RoomDetailView(DetailView):
     template_name = 'room-details.html'
     model = Room
-    queryset = Room.objects.all()
+    # queryset = Room.objects.all()
 
     # context_object_name = 'room'
+    form_class = ReviewForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['room'] = context.get('object')
         return context
 
-    def post(self, request, pk):
-        review_list = Review.objects.all()
+    def post(self, request, pk, *args, **kwargs):
+
+        room = get_object_or_404(Room, id=pk)
+        reviews = Review.objects.all()
+        # profile = Profile.objects.filter(user=request.user)
         if request.method == 'POST':
-            form_review = ReviewForm(request.POST)
-            if form_review.is_valid():
-                form_review = form_review.save(commit=False)
-                form_review.author = self.request.user
-                form_review.save()
-                return redirect('room-detail', pk)
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                form = form.save(commit=False)
+                form.author.profile = self.request.user.id
+
+
+                form.room = room
+
+                form.save()
+                return redirect('part_room:room', pk)
 
         else:
-            form_review = ReviewForm()
-        return render('room-details.html', {'review_list': review_list, 'form_review': form_review})
+            form = ReviewForm()
+        return render(request, 'room-details.html', {'reviews': reviews, 'form': form,
+                                                     'room': room})
+
+
+def review_delete(request, id):
+    review = Review.objects.get(id=id)
+    if review.author.review_author == request.user:
+        review.is_removed = True
+        review.delete()
+    else:
+        return HttpResponse("You can not delete other people's commentary!")
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+

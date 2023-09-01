@@ -76,6 +76,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <!-- /bg_white -->
           <div class="bg_white add_bottom_120">
@@ -145,6 +146,8 @@
                     <!-- /row -->
                 </div>
                 <div class="col-lg-7 order-lg-1">
+                    {% if user.is_authenticated %}
+
                     {% for review in room.review_post.all %}
                     <div class="review_card">
                         <div class="row">
@@ -157,8 +160,10 @@
                                     <span class="rating">{{ review.rating_average }}<strong>Rating average</strong></span>
                                     <em>Published {{ review.created }}</em>
                                 </div>
-                                <h4>"Great Location!!"</h4>
-                                <p>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his. Tollit molestie suscipiantur his et.</p>
+                                <h4>{{review.name_comment}}</h4>
+                                <p> {{ review.content }}</p>
+                                <small><a href="{% url 'part_room:delete_review' review.id %}">Удалить</a></small>
+
                             </div>
                         </div>
                         <!-- /row -->
@@ -166,8 +171,20 @@
                     <!-- /review_card -->
 
                     <!-- /review_card -->
-                    <p class="text-end"><a href="#0" class="btn_1">Leave a review</a></p>
                     {% endfor %}
+                    <div>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+
+                            <button type="submit" class="text-end">Leave a review</button>
+                        </form>
+                    </div>
+                    {% else %}
+                    <p>Please register at site!</p>
+
+               {% endif %}
+
                 </div>
             </div>
         </div>
