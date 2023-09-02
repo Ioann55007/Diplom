@@ -1,21 +1,42 @@
 from django.contrib import admin
 
-from .models import Room, Review, DoubleRoom, DeluxeRoom, SuperiorRoom, PhotoDetailRoom
+from .models import Room, Review, DoubleRoom, DeluxeRoom, SuperiorRoom, PhotoDetailRoom, RoomSuperior, RoomDouble, \
+    RoomDeluxe, JuniorSuite
 
 
 @admin.register(DoubleRoom)
-class AdminPhotoDetailRoom(admin.ModelAdmin):
+class AdminDoubleRoom(admin.ModelAdmin):
     list_display = ('price', 'add_photo', 'room')
 
 
 @admin.register(DeluxeRoom)
-class AdminPhotoDetailRoom(admin.ModelAdmin):
+class AdminDeluxeRoom(admin.ModelAdmin):
     list_display = ('price', 'add_photo', 'room')
 
 
 @admin.register(SuperiorRoom)
-class AdminPhotoDetailRoom(admin.ModelAdmin):
+class AdminSuperiorRoom(admin.ModelAdmin):
     list_display = ('price', 'add_photo', 'room')
+
+
+@admin.register(RoomSuperior)
+class AdminRoomSuperior(admin.ModelAdmin):
+    list_display = ('price', 'add_photo', 'content')
+
+
+@admin.register(RoomDouble)
+class AdminRoomDouble(admin.ModelAdmin):
+    list_display = ('price', 'add_photo', 'content')
+
+
+@admin.register(RoomDeluxe)
+class AdminRoomDeluxe(admin.ModelAdmin):
+    list_display = ('price', 'add_photo', 'content')
+
+
+@admin.register(JuniorSuite)
+class AdminJuniorSite(admin.ModelAdmin):
+    list_display = ('price', 'add_photo', 'content')
 
 
 @admin.register(Room)
@@ -25,9 +46,8 @@ class AdminRoom(admin.ModelAdmin):
 
 
 @admin.register(PhotoDetailRoom)
-class AdminRoom(admin.ModelAdmin):
+class AdminPhotoDetailRoom(admin.ModelAdmin):
     list_display = ('room', 'add_photo')
-
 
 
 @admin.register(Review)

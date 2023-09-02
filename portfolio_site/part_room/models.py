@@ -45,7 +45,8 @@ class Room(models.Model):
 
 
 class PhotoDetailRoom(models.Model):
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='photo_room', verbose_name='Номер в гостинице')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='photo_room',
+                             verbose_name='Номер в гостинице')
     add_photo = models.ImageField(upload_to="image_room/", blank=True, verbose_name='Фото')
 
     class Meta:
@@ -69,18 +70,19 @@ class DeluxeRoom(models.Model):
     objects = models.Manager()
     price = models.PositiveIntegerField()
     add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='deluxe_room', verbose_name='Номер в гостинице')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='deluxe_room',
+                             verbose_name='Номер в гостинице')
 
     class Meta:
         verbose_name = 'изображение Deluxe Room'
         verbose_name_plural = 'Фото Deluxe Room'
 
 
-
 class SuperiorRoom(models.Model):
     price = models.PositiveIntegerField()
     add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='superior_room', verbose_name='Номер в гостинице')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='superior_room',
+                             verbose_name='Номер в гостинице')
 
     class Meta:
         verbose_name = 'изображение Superior Room'
@@ -100,7 +102,45 @@ class Review(models.Model):
         return f"{self.author}, {self.room}"
 
 
+class RoomDouble(models.Model):
+    price = models.PositiveIntegerField()
+    add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
+    content = models.TextField(default=None)
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name = 'изображение Room Double'
+        verbose_name_plural = 'Фото Room Double'
 
 
+class RoomDeluxe(models.Model):
+    price = models.PositiveIntegerField()
+    add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
+    content = models.TextField(default=None)
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name = 'изображение Room Deluxe'
+        verbose_name_plural = 'Фото Room Deluxe'
 
 
+class RoomSuperior(models.Model):
+    price = models.PositiveIntegerField()
+    add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
+    content = models.TextField(default=None)
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name = 'изображение Room Superior'
+        verbose_name_plural = 'Фото Room Superior'
+
+
+class JuniorSuite(models.Model):
+    price = models.PositiveIntegerField()
+    add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
+    content = models.TextField(default=None)
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name = 'изображение Junior Suite '
+        verbose_name_plural = 'Фото Junior Suite'
