@@ -7,15 +7,15 @@
     {% include 'static_html/nav-panel.html' %}
 
 
- 
+
     <main>
 
         <div class="hero medium-height jarallax" data-jarallax data-speed="0.2">
-            <img class="jarallax-img" src="{% static 'img/hero_blog.jpg' %}" alt="">
+            <img class="jarallax-img" src="{{post.image_post.url}}" alt="">
             <div class="wrapper opacity-mask d-flex align-items-center justify-content-center text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                 <div class="container">
-                    <small class="slide-animated one">10 oct 2022 - by Admin</small>
-                    <h1 class="slide-animated two">Best Restaurant in 2022</h1>
+                    <small class="slide-animated one">{{post.data_published}}- {{post.user}}</small>
+                    <h1 class="slide-animated two">{{post.name_new_post}}</h1>
                 </div>
             </div>
         </div>
@@ -25,22 +25,15 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="box_contents_in">
-                        <h2 class="mb-4">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</h2>
-                        <p>At vero eos et accusamus et iusto odio <strong>dignissimos ducimus</strong> qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga</p>
-                        <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus <strong>autem quibusdam</strong> et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                        <h2 class="mb-4">{{post.name_new_post}}</h2>
+                        <p>{{post.content}}</p>
                     </div>
                 </div>
                 <div class="col-lg-10 my-4">
-                    <figure><img src="{% static 'img/blog_in.jpg' %}" alt="" class="img-fluid"></figure>
+                    <figure><img src="{{post.image_post.url}}" alt="" class="img-fluid"></figure>
                 </div>
                 <div class="col-lg-8">
-                    <div class="box_contents_in">
-                        <small><span></span></small>
-                        <h2 class="mb-4">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</h2>
-                        <p>At vero eos et accusamus et iusto odio <strong>dignissimos ducimus</strong> qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga</p>
-                        <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus <strong>autem quibusdam</strong> et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
-                    </div>
-                    <p class="text-center mt-5"><a href="#0" class="btn_1 outline">Next Post</a></p>
+
                 </div>
             </div>
             <!--/row -->
@@ -53,81 +46,44 @@
                     <div class="col-lg-8">
                         <div id="comments">
                             <h3>Comments</h3>
+                            {% if user.is_authenticated %}
+
                             <ul>
+
+                                {% for comment in post.comment_new_post.all %}
+
                                 <li>
                                     <div class="avatar">
-                                        <a href="#"><img src="{% static 'img/avatar1.jpg' %}" alt="">
+                                        <a href="#"><img src="{{comment.user.avatar.url}}" alt="">
                                         </a>
                                     </div>
                                     <div class="comment_right clearfix">
                                         <div class="comment_info">
-                                            By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
+                                            By <a href="#">{{comment.user}}</a><span>|</span>{{comment.created}}
                                         </div>
                                         <p>
-                                            Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
-                                        </p>
-                                    </div>
-                                    <ul class="replied-to">
-                                        <li>
-                                            <div class="avatar">
-                                                <a href="#"><img src="{% static 'img/avatar4.jpg' %}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="comment_right clearfix">
-                                                <div class="comment_info">
-                                                    By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
-                                                </div>
-                                                <p>
-                                                    Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
-                                                </p>
-                                                <p>
-                                                    Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
-                                                </p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <div class="avatar">
-                                        <a href="#"><img src="{% static 'img/avatar1.jpg' %}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="comment_right clearfix">
-                                        <div class="comment_info">
-                                            By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
-                                        </div>
-                                        <p>
-                                            Cursus tellus quis magna porta adipiscin
+                                            {{comment.content}}
                                         </p>
                                     </div>
                                 </li>
+                                {% endfor %}
                             </ul>
+
                         </div>
                         <hr class="more_margin">
                         <h5 class="mb-3">Leave a comment</h5>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" name="name" id="name2" class="form-control" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" name="email" id="email2" class="form-control" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                    <input type="text" name="email" id="website3" class="form-control" placeholder="Website">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="comments" id="comments2" rows="6" placeholder="Comment"></textarea>
-                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{form.as_p}}
                         <div class="form-group">
                             <button type="submit" id="submit2" class="btn_1 outline mb-3">Submit</button>
                         </div>
+                        </form>
+
+                        {% else %}
+
+                        <p>Please register at site!</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -139,7 +95,7 @@
 
       {% include 'static_html/footer.html' %}
 
-   
+
     <div class="progress-wrap">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -151,5 +107,9 @@
 <script src="{% static 'js/common_scripts.js' %}"></script>
 <script src="{% static 'js/common_functions.js' %}"></script>
 <script src="{% static 'phpmailer/validate.js' %}"></script>
+<script>
 
+
+
+</script>
 {% endblock %}

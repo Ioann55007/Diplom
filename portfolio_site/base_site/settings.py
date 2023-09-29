@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'django-insecure-k6h*ho&qwszryn04k6y_e^&286&vx-$-q!z9eie2+4@6#52&pe
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -41,6 +39,7 @@ INSTALLED_APPS = [
     'part_post.apps.PartSecondConfig',
     'part_room.apps.PartRoomConfig',
     'the_profile.apps.TheProfileConfig',
+    'paymants.apps.PaymantsConfig',
 
 ]
 
@@ -74,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'base_site.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -84,7 +82,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -104,7 +101,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -115,7 +111,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -129,5 +124,20 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 AUTH_USER_MODEL = 'part_room.User'
+
+STRIPE_PUBLISHABLE_KEY = "pk_test_51NuQpzK9uUo7vtk99y6aorEDvSUVs3GZYqzsXrN9CIPyVjmmNHIOnQxVw6aAAcE0p23AKdOhxtKV4mdvk7CC6jvq00nnzbftoo"
+STRIPE_SECRET_KEY = "sk_test_51NuQpzK9uUo7vtk9ePb5cBCur9obGtnTq7XXEosZF3Sk7EmR1YM2FPKaCd3XjkzQRtTHFsDiauX6WumWTUlm3gVF00GHwGZBkd"
+
+BACKEND_DOMAIN = 'http://127.0.0.1:8000'
+PAYMENT_SUCCESS_URL = 'http://127.0.0.1:8000/success/'
+PAYMENT_CANCEL_URL = 'http://127.0.0.1:8000/cancel/'
+
+# from decouple import config
+#
+# # Stripe
+# STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
+# STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+
+STRIPE_WEBHOOK_SECRET='whsec_f35c3e7d6488c8c5b90c8277225ca81e33ecbd616e903d4a5a2cdfdaf324cc67'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

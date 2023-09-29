@@ -4,7 +4,7 @@
 {% include 'static_html/header.html' %}
 {% include 'static_html/nav-panel.html' %}
     <!-- /nav_panel -->
- 
+
     <main>
 
         <div class="hero full-height jarallax" data-jarallax data-speed="0.2">
@@ -264,19 +264,21 @@
                 </div>
                 <div class="col-xl-7">
                     <div data-cue="slideInUp" data-delay="200">
+                        <form method="post" id="form">
+                            {% csrf_token %}
                         <div class="booking_wrapper">
                             <p id="daterangepicker-result" class="d-none"></p>
-                            <input id="date_booking" type="hidden">
+                            <input name="calendar" value="cal_endar" id="date_booking" type="hidden">
                             <div id="daterangepicker-embedded-container" class="embedded-daterangepicker clearfix mb-4"></div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="custom_select">
-                                        <select class="wide">
-                                            <option>Select Room</option>
-                                            <option>Double Room</option>
-                                            <option>Deluxe Room</option>
-                                            <option>Superior Room</option>
-                                            <option>Junior Suite</option>
+                                        <select name="select" class="wide">
+                                            <option value="choise_room">Select Room</option>
+                                            <option value="double">Double Room</option>
+                                            <option value="deluxe">Deluxe Room</option>
+                                            <option value="superior">Superior Room</option>
+                                            <option value="junior">Junior Suite</option>
                                         </select>
                                     </div>
                                 </div>
@@ -285,23 +287,26 @@
                                         <div class="col-6">
                                             <div class="qty-buttons mb-3 version_2">
                                                 <input type="button" value="+" class="qtyplus" name="adults_booking">
-                                                <input type="text" name="adults_booking" id="adults_booking" value="" class="qty form-control" placeholder="Adults">
-                                                <input type="button" value="-" class="qtyminus" name="adults_booking">
+                                                <input type="text" name="adults_booking" id="adults_booking" value="adults" class="qty form-control" placeholder="Adults">
+                                                <input type="button" value="adults" class="qtyminus" name="adults_booking">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="mb-3 qty-buttons mb-3 version_2">
                                                 <input type="button" value="+" class="qtyplus" name="childs_booking">
                                                 <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
-                                                <input type="button" value="-" class="qtyminus" name="childs_booking">
+                                                <input type="button" value="childs" class="qtyminus" name="childs_booking">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                            <button type="submit" class="text-end mt-5">
+                                                        Book Now</button>
+
+                        </form>
                         <!-- / row -->
-                        <p class="text-end mt-5"><a href="#0" class="btn_1 outline">Book Now</a></p>
                     </div>
                 </div>
                 <!-- /col -->
@@ -313,7 +318,7 @@
 
    {% include 'static_html/footer.html' %}
     <!-- /footer -->
-   
+
     <div class="progress-wrap">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
@@ -327,6 +332,7 @@
 <script src="{% static 'js/common_functions.js' %}"></script>
 <script src="{% static 'js/datepicker_inline.js' %}"></script>
 <script src="{% static 'phpmailer/validate.js' %}"></script>
+<script src="{% static 'custom_js/may.js' %}"></script>
 <script>
     // Progress bars animation
     $(function() {

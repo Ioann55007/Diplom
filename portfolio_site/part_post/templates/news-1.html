@@ -1,11 +1,57 @@
-{%  load static %}
+{% load static %}
 {% block content %}
+
+<html lang="zxx">
+
+{% include 'static_html/head.html' %}
+
 {% include 'static_html/header.html' %}
 
-    {% include 'static_html/nav-panel.html' %}
+    <div class="nav_panel">
+        <a href="#" class="closebt open_close_nav_panel"><i class="bi bi-x"></i></a>
+        <div class="logo_panel"><img src="{% static 'img/logo_sticky.png' %}" width="135" height="45" alt=""></div>
+        <div class="sidebar-navigation">
+            <nav>
+                <ul class="level-1">
+                    <li class="parent"><a href="#0">Home</a>
+                         <ul class="level-2">
+                            <li class="back"><a href="#0">Back</a></li>
+                            <li><a href="index.html">Home Video Bg</a></li>
+                            <li><a href="index-2.html">Home Carousel</a></li>
+                            <li><a href="index-3.html">Home FlexSlider</a></li>
+                            <li><a href="index-4.html">Home Youtube/Vimeo</a></li>
+                            <li><a href="index-5.html">Home Parallax</a></li>
+                        </ul>
+                    </li>
+                    <li class="parent"><a href="#0">Rooms & Suites</a>
+                        <ul class="level-2">
+                            <li class="back"><a href="#0">Back</a></li>
+                            <li><a href="room-list-1.html">Room list 1</a></li>
+                            <li><a href="room-list-2.html">Room list 2</a></li>
+                            <li><a href="room-list-3.html">Room list 3</a></li>
+                            <li><a href="room-details.html">Room details</a></li>
+                            <li><a href="room-details-booking.html">Working Booking Request</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="news-1.html">News & events</a></li>
+                    <li><a href="contacts.html">Contact</a></li>
+                    <li><a href="404.html">Error Page</a></li>
+                    <li><a href="menu-2.html">Menu Version 2 <span class="custom_badge">Hot</span></a></li>
+                    <li><a href="menu-3.html">Menu Version 3</a></li>
+                    <li><a href="menu-4.html">Menu Version 4</a></li>
+                </ul>
+                <div class="panel_footer">
+                    <div class="phone_element"><a href="tel://423424234"><i class="bi bi-telephone"></i><span><em>Info and bookings</em>+41 934 121 1334</span></a></div>
+                </div>
+                <!-- /panel_footer -->
+            </nav>
+        </div>
+        <!-- /sidebar-navigation -->
+    </div>
     <!-- /nav_panel -->
 
- 
+
     <main>
 
         <div class="hero medium-height jarallax" data-jarallax data-speed="0.2">
@@ -22,66 +68,18 @@
         <div class="container margin_120_95">
             <div class="isotope-wrapper">
                 <div class="row justify-content-center">
+                    {% for post in posts %}
                     <div class="item col-xl-4 col-lg-6">
-                        <a href="news-post.html" class="box_contents" data-cue="slideInUp">
-                            <figure><img src="{% static 'img/blog-1.jpg' %}" alt="" class="img-fluid"><em>11 Dec</em></figure>
+                        <a href="{% url 'part_post:news-post' post.slug %}" class="box_contents" data-cue="slideInUp">
+                            <figure><img src="{{post.image_post.url}}" alt="" class="img-fluid"><em>{{post.data_published}}</em></figure>
                             <div class="wrapper">
                                 <small>Travel<span></span></small>
-                                <h2>The vacation and travel Guide for experts in 2022</h2>
+                                <h2>{{post.name_new_post}}</h2>
                                 <em>Read more</em>
                             </div>
                         </a>
                     </div>
-                    <div class="item col-xl-4 col-lg-6">
-                        <a href="news-post.html" class="box_contents" data-cue="slideInUp">
-                            <figure><img src="{% static 'img/blog-2.jpg' %}" alt="" class="img-fluid"><em>21 Dec</em></figure>
-                            <div class="wrapper">
-                                <small>Restaurant<span></span></small>
-                                <h2>Best Local Restaurant in 2022</h2>
-                                <em>Read more</em>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item col-xl-4 col-lg-6">
-                        <a href="news-post.html" class="box_contents" data-cue="slideInUp">
-                            <figure><img src="{% static 'img/blog-3.jpg' %}" alt="" class="img-fluid"><em>24 Dec</em></figure>
-                            <div class="wrapper">
-                                <small>Event<span></span></small>
-                                <h2>Yayoi Kusama: Infinity Mirror Rooms at Tate Modern</h2>
-                                <em>Read more</em>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item col-xl-4 col-lg-6">
-                        <a href="news-post.html" class="box_contents" data-cue="slideInUp">
-                            <figure><img src="{% static 'img/blog-4.jpg' %}" alt="" class="img-fluid"><em>08 Dec</em></figure>
-                            <div class="wrapper">
-                                <small>Event<span></span></small>
-                                <h2>Bix Meeting 2023</h2>
-                                <em>Read more</em>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item col-xl-4 col-lg-6">
-                        <a href="news-post.html" class="box_contents" data-cue="slideInUp">
-                            <figure><img src="{% static 'img/blog-5.jpg' %}" alt="" class="img-fluid"><em>11 Oct</em></figure>
-                            <div class="wrapper">
-                                <small>Guide<span></span></small>
-                                <h2>Top 15 things to do and Discover story-worthy travel moments</h2>
-                                <em>Read more</em>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item col-xl-4 col-lg-6">
-                        <a href="news-post.html" class="box_contents" data-cue="slideInUp">
-                            <figure><img src="{% static 'img/blog-6.jpg' %}" alt="" class="img-fluid"><em>20 Oct</em></figure>
-                            <div class="wrapper">
-                                <small>News<span></span></small>
-                                <h2>Cycling tour October 2022</h2>
-                                <em>Read more</em>
-                            </div>
-                        </a>
-                    </div>
+                    {% endfor %}
                 </div>
                 <!--/row -->
             </div>
@@ -114,7 +112,7 @@
 
     {% include 'static_html/footer.html' %}
     <!-- /footer -->
-   
+
 
     <div class="progress-wrap">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
@@ -141,4 +139,6 @@
     });
 </script>
 
+</body>
+</html>
 {% endblock %}

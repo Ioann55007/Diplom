@@ -4,8 +4,8 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView
 
 from .forms import ReviewForm
-from .models import Room, Review, DoubleRoom, DeluxeRoom, User, RoomDouble, RoomDeluxe, RoomSuperior, JuniorSuite
-from the_profile.models import Profile
+from .models import Room, Review, DoubleRoom, DeluxeRoom, User
+
 
 
 class RoomListView(ListView):
@@ -43,59 +43,6 @@ class DeluxeRoomListView(ListView):
         context['deluxe_room'] = deluxe_room
         return context
 
-
-class RoomDeluxeListView(ListView):
-    template_name = 'room-list-2.html'
-    context_object_name = 'room_double'
-    model = RoomDeluxe
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        room_deluxe = RoomDeluxe.objects.all()
-        context['room_deluxe'] = room_deluxe
-        return context
-
-
-
-def double_room(request):
-    room_double = RoomDouble.objects.all()
-
-    return render(request, 'room-list-2.html', {'room_double': room_double})
-
-
-# class RoomListView(ListView):
-#     template_name = 'room-list-1.html'
-#     context_object_name = 'rooms'
-#     model = Room
-#
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data()
-#         rooms = Room.objects.order_by('-name_room')
-#         context['rooms'] = rooms
-#         return context
-
-class RoomSuperiorLiView(ListView):
-    template_name = 'room-list-2.html'
-    context_object_name = 'room_superior'
-    model = RoomSuperior
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        room_superior = RoomSuperior.objects.all()
-        context['room_superior'] = room_superior
-        return context
-
-
-class JuniorSiteView(ListView):
-    template_name = 'room-list-2.html'
-    context_object_name = 'junior_site'
-    model = JuniorSuite
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        junior_site = JuniorSuite.objects.all()
-        context['junior_site'] = junior_site
-        return context
 
 
 class RoomDetailView(DetailView):

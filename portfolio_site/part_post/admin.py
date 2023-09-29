@@ -6,7 +6,8 @@ from .models import NewPost, Comment
 @admin.register(NewPost)
 class AdminNewPost(admin.ModelAdmin):
     list_display_links = ('name_new_post',)
-    list_display = ('name_new_post', 'content', 'data_published')
+    list_display = ('name_new_post', 'content', 'data_published', 'image_post')
+    prepopulated_fields = {'slug': ('name_new_post',)}
 
 
 
