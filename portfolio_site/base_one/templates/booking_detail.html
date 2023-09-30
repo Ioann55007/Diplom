@@ -1,14 +1,16 @@
 {% comment %} templates/products/product_detail.html {% endcomment %}
-{% comment %}
+
+
 {% block title %} Booking {% endblock title%}
 {% block script %} <script src="https://js.stripe.com/v3/"></script> {% endblock script%}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="card-deck">
-  {% for booking in bookings %}
+  {% if booking  %}
   <div class="card">
 
     <div class="card-body">
-      <h5 class="card-title">{{booking_in_hotel.name}}</h5>
+      <h5 class="card-title">{{booking.room_booking}}</h5>
       <div class="card-text">
         <h5 class="card-text">${{ booking.room_booking.price }}</h5>
         <form
@@ -21,8 +23,17 @@
       </div>
     </div>
   </div>
-  {% endfor %}
+  {% endif %}
 
 </div>
+<div class="container mt-5 w-50">
+  <form id="contactForm" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" name="contact-submit" class="btn btn-success btn-lg" />
+  </form>
+</div>
 {% endblock content %}
-{% endcomment %}
+
+
+

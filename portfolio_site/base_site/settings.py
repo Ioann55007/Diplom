@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'part_room.apps.PartRoomConfig',
     'the_profile.apps.TheProfileConfig',
     'paymants.apps.PaymantsConfig',
+    'crispy_forms',
+    'crispy_bootstrap4',
 
 ]
 
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'base_one.views.AjaxMiddleware',
 ]
 
 ROOT_URLCONF = 'base_site.urls'
@@ -141,3 +144,6 @@ PAYMENT_CANCEL_URL = 'http://127.0.0.1:8000/cancel/'
 
 STRIPE_WEBHOOK_SECRET='whsec_f35c3e7d6488c8c5b90c8277225ca81e33ecbd616e903d4a5a2cdfdaf324cc67'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

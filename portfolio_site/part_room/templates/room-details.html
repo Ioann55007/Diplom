@@ -262,9 +262,10 @@
                         <p class="phone_element no_borders"><a href="tel://423424234"><i class="bi bi-telephone"></i><span><em>Info and bookings</em>+41 934 121 1334</span></a></p>
                     </div>
                 </div>
-                <div class="col-xl-7">
+                <di_v class="col-xl-7">
                     <div data-cue="slideInUp" data-delay="200">
-                        <form method="post" id="form">
+                        {% comment %}
+                        <form method="post" id="form" action="#">
                             {% csrf_token %}
                         <div class="booking_wrapper">
                             <p id="daterangepicker-result" class="d-none"></p>
@@ -306,9 +307,12 @@
                                                         Book Now</button>
 
                         </form>
+                        {% endcomment %}
+                        <li><a href="{% url 'booking_detail' booking.id %}" class="btn_1 btn_scrollto">Book Now</a></li>
+
                         <!-- / row -->
                     </div>
-                </div>
+                </di_v>
                 <!-- /col -->
             </div>
             <!-- /row -->

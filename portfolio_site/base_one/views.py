@@ -4,14 +4,14 @@ from django.views.generic import TemplateView, DetailView
 import stripe
 from django.conf import settings
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, DetailView
-
+from .forms import BookingForm
 from .models import BookingHotel
 
 # from .models import BookingHotel
@@ -57,56 +57,36 @@ class BookingHotelDetailView(DetailView):
     model = BookingHotel
     context_object_name = "booking_in_hotel"
     template_name = "booking_detail.html"
+    paginate_by = 1
+
 
     def get_context_data(self, **kwargs):
         context = super(BookingHotelDetailView, self).get_context_data()
         # context["bookings"] = BookingHotel.objects.filter(room_booking=self.get_object())
-        context["bookings"] = BookingHotel.objects.all()
+        # context["bookings"] = BookingHotel.objects.all()
+        context["booking"] = BookingHotel.objects.get(id=self.kwargs["pk"])
+
         return context
 
-    # def form_valid(self, form):
-    #     form.instance.date_reg = timezone.now()
-    #     return super().form_valid(form)
 
+    def post(self, request, pk, *args, **kwargs):
+        # form = BookingForm()
+        # rooms_bookings = BookingHotel.objects.all()
 
-# class CreateStripeCheckoutSessionView(View):
-#     """
-#     Create a checkout session and redirect the user to Stripe's checkout page
-#     """
-#
-#     def post(self, request, *args, **kwargs):
-#         # price_booking = BookingHotel.sum().objects.get(id=self.kwargs["pk"])
-#         price_booking = BookingHotel.sum
-#         booking = BookingHotel.objects.get(id=2)
-#         checkout_session = stripe.checkout.Session.create(
-#             payment_method_types=["card"],
-#             line_items=[
-#                 {
-#                     "price_data": {
-#                         "currency": "usd",
-#                         "unit_amount": price_booking,
-#                         "booking_data": {
-#                             "name_room": booking.room_booking,
-#                             "user_booking": booking.user_booking,
-#                             "arrival_date": booking.arrival_date,
-#                             "date_of_departure": booking.date_of_departure,
-#                             "adults": booking.adults,
-#                             "childs": booking.childs,
-#                             # "images": [
-#                             #     f"{settings.BACKEND_DOMAIN}/{price.product.thumbnail}"
-#                             # ],
-#                         },
-#                     },
-#                     # "quantity": price.product.quantity,
-#                 }
-#             ],
-#             # metadata={"booking_id": price.product.id},
-#             metadata={"booking_id": booking.id},
-#             mode="payment",
-#             success_url=settings.PAYMENT_SUCCESS_URL,
-#             cancel_url=settings.PAYMENT_CANCEL_URL,
-#         )
-#         return redirect(checkout_session.url)
+        # if request.method == "POST" and request.is_ajax():
+        if request.method == "POST":
+            form = BookingForm(request.POST)
+            if form.is_valid():
+                # form = form.save(commit=False)
+                # form.author.profile = self.request.user.id
+                form.save()
+
+                return redirect('booking_detail', pk)
+
+        else:
+            form = BookingForm()
+
+        return render(request, "booking_detail.html", {"form": form})
 
 
 class CreateStripeCheckoutSessionView(View):
@@ -117,7 +97,6 @@ class CreateStripeCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
         # price = BookingHotel.sum
         booking = BookingHotel.objects.get(id=self.kwargs["pk"])
-
 
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=["card"],
@@ -188,6 +167,42 @@ class StripeWebhookView(View):
             # Can handle other events here.
 
             return HttpResponse(status=200)
+
+
+class AjaxMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        def is_ajax(self):
+            return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
+        request.is_ajax = is_ajax.__get__(request)
+        response = self.get_response(request)
+        return response
+
+
+class Booking(TemplateView):
+    template_name = 'booking_detail.html'
+
+    # def post(self, request):
+    #     # form = BookingForm()
+    #     # rooms_bookings = BookingHotel.objects.all()
+    #
+    #     # if request.method == "POST" and request.is_ajax():
+    #     if request.method == "POST":
+    #         form = BookingForm(request.POST)
+    #         if form.is_valid():
+    #             # form = form.save(commit=False)
+    #             # form.author.profile = self.request.user.id
+    #             form.save()
+    #
+    #             return redirect('booking')
+    #
+    #     else:
+    #         form = BookingForm()
+    #
+    #     return render(request, "booking.html", {"form": form})
 
 
 

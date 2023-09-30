@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+# from .models import NewPost, Comment
 from .models import NewPost, Comment
 
 

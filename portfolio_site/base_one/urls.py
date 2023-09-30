@@ -17,6 +17,8 @@ urlpatterns = [
     path('menu-2/', TemplateView.as_view(template_name='menu-2.html'), name='menu_2'),
     path('menu-3/', TemplateView.as_view(template_name='menu-3.html'), name='menu_3'),
     path('menu-4/', TemplateView.as_view(template_name='menu-4.html'), name='menu_4'),
+    # path('contact-form/', views.contact_form, name='contact_form'),
+    path("booking/", views.Booking.as_view(), name="booking"),
 
 ]
 

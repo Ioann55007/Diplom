@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView
 
 from .forms import ReviewForm
 from .models import Room, Review, DoubleRoom, DeluxeRoom, User
-
+from base_one.models import BookingHotel
 
 
 class RoomListView(ListView):
@@ -56,6 +56,10 @@ class RoomDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['room'] = context.get('object')
+        # context["bookings"] = BookingHotel.objects.all()
+        context["booking"] = BookingHotel.objects.get(id=self.kwargs["pk"])
+
+
         return context
 
     def post(self, request, pk, *args, **kwargs):
