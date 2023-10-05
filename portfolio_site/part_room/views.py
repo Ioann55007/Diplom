@@ -7,6 +7,10 @@ from .forms import ReviewForm
 from .models import Room, Review, DoubleRoom, DeluxeRoom, User
 from base_one.models import BookingHotel
 
+from base_one.forms import BookingForm
+
+from the_profile.models import Profile
+
 
 class RoomListView(ListView):
     template_name = 'room-list-1.html'
@@ -44,49 +48,69 @@ class DeluxeRoomListView(ListView):
         return context
 
 
+# class RoomDetailView(DetailView):
+#     template_name = 'room-details.html'
+#     model = Room
+#     # queryset = Room.objects.all()
+#
+#     # context_object_name = 'room'
+#     form_class = ReviewForm
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data()
+#         context['room'] = context.get('object')
+#         # context["bookings"] = BookingHotel.objects.all()
+#         context["booking"] = BookingHotel.objects.get(id=self.kwargs["pk"])
+#
+#
+#         return context
 
-class RoomDetailView(DetailView):
-    template_name = 'room-details.html'
-    model = Room
-    # queryset = Room.objects.all()
+def room_detail(request, pk):
 
-    # context_object_name = 'room'
-    form_class = ReviewForm
+    room = get_object_or_404(Room, id=pk)
+    bookings = BookingHotel.objects.all()
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = Profile.objects.get(user=request.user)
+            form.room = room
+            form.price = room.price
+            form.save()
+            return redirect('booking')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['room'] = context.get('object')
-        # context["bookings"] = BookingHotel.objects.all()
-        context["booking"] = BookingHotel.objects.get(id=self.kwargs["pk"])
+    else:
+        form = BookingForm()
+    return render(request, "room-details.html",
+                  {"room": room,
+                   "bookings": bookings,
+                   "form": form})
 
 
-        return context
 
-    def post(self, request, pk, *args, **kwargs):
+def review_room(request, pk):
+    room = get_object_or_404(Room, id=pk)
+    reviews = Review.objects.all()
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.author = Profile.objects.get(user=request.user)
+            form.room = room
+            form.save()
+            return redirect('part_room:room', pk)
 
-        room = get_object_or_404(Room, id=pk)
-        reviews = Review.objects.all()
-        # profile = Profile.objects.filter(user=request.user)
-        if request.method == 'POST':
-            form = ReviewForm(request.POST)
-            if form.is_valid():
-                form = form.save(commit=False)
-                form.author.profile = self.request.user.id
-
-                form.room = room
-
-                form.save()
-                return redirect('part_room:room', pk)
-
-        else:
-            form = ReviewForm()
-        return render(request, 'room-details.html', {'reviews': reviews, 'form': form,
-                                                     'room': room})
+    else:
+        form = ReviewForm()
+    return render(request, "room-details.html",
+                  {"room": room,
+                   "reviews": reviews,
+                   "form": form})
 
 
 def review_delete(request, id):
     review = Review.objects.get(id=id)
-    if review.author.review_author == request.user:
+    if review.author == Profile.objects.get(user=request.user):
         review.is_removed = True
         review.delete()
     else:

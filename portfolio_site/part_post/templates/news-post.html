@@ -49,13 +49,13 @@
                             {% if user.is_authenticated %}
 
                             <ul>
-
-                                {% for comment in post.comment_new_post.all %}
+                            {% if comments %}
+                                {% for comment in comments %}
 
                                 <li>
                                     <div class="avatar">
-                                        <a href="#"><img src="{{comment.user.avatar.url}}" alt="">
-                                        </a>
+                                        <img src="{{comment.user.avatar.url}}" alt="">
+
                                     </div>
                                     <div class="comment_right clearfix">
                                         <div class="comment_info">
@@ -64,28 +64,33 @@
                                         <p>
                                             {{comment.content}}
                                         </p>
+                                        <small><a href="{% url 'part_post:delete_comment' comment.id %}">
+                                            Удалить</a></small>
+
                                     </div>
                                 </li>
                                 {% endfor %}
+                                {% endif %}
                             </ul>
 
                         </div>
                         <hr class="more_margin">
                         <h5 class="mb-3">Leave a comment</h5>
-                        <form method="post">
-                            {% csrf_token %}
-                            {{form.as_p}}
-                        <div class="form-group">
-                            <button type="submit" id="submit2" class="btn_1 outline mb-3">Submit</button>
-                        </div>
-                        </form>
 
-                        {% else %}
+                       <form method="post" action="{% url 'part_post:news-post' post.slug   %}" id="form_ajax">
+                           {% csrf_token %}
 
-                        <p>Please register at site!</p>
-                        {% endif %}
+                           {{ my_form.as_p }}
+                           <button type="submit" style="border:solid 2px
+                                            blue;background-color:black;color:red;">Отправить</button>
+
+                       </form>
                     </div>
                 </div>
+                {% else %}
+                    <p>Please register at site!</p>
+
+               {% endif %}
             </div>
             <!--/container -->
         </div>
@@ -107,9 +112,5 @@
 <script src="{% static 'js/common_scripts.js' %}"></script>
 <script src="{% static 'js/common_functions.js' %}"></script>
 <script src="{% static 'phpmailer/validate.js' %}"></script>
-<script>
 
-
-
-</script>
 {% endblock %}

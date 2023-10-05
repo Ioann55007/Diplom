@@ -1,7 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import DetailView, ListView
+from the_profile.models import Profile
 
-from .form import CommentForm
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views import View
+from django.views.generic import DetailView, ListView, CreateView
+
+from .forms import CommentForm
 from .models import NewPost, Comment
 
 
@@ -12,34 +16,40 @@ class NewsOneView(ListView):
 
 
 
-class NewsDetail(DetailView):
-    template_name = 'news-post.html'
-    model = NewPost
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['post'] = context.get('object')
-        return context
-
-    def post(self, request, slug=None, *args, **kwargs):
-
-        new_post = get_object_or_404(NewPost, slug=slug)
-        comments = Comment.objects.all()
-        # profile = Profile.objects.filter(user=request.user)
-        if request.method == 'POST':
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                form = form.save(commit=False)
-                form.user.user = self.request.user.id
-
-                form.new_post = new_post
-
-                form.save()
-                return redirect('part_post:news-post', slug)
-
-        else:
-            form = CommentForm()
-        return render(request, 'news-post.html', {'comments': comments, 'form': form,
-                                                     'new_post': new_post})
 
 
+
+def news_detail(request, slug):
+    """Вывод полной статьи
+    """
+    post = get_object_or_404(NewPost, slug=slug)
+    comments = Comment.objects.all()
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = Profile.objects.get(user=request.user)
+            form.new_post = post
+            form.save()
+            return redirect('part_post:news-post', slug)
+
+    else:
+        form = CommentForm()
+    return render(request, "news-post.html",
+                  {"post": post,
+                   "comments": comments,
+                   "form": form})
+
+
+
+
+
+def comment_delete(request, id):
+    comment = Comment.objects.get(id=id)
+    if comment.user == Profile.objects.get(user=request.user):
+        comment.is_removed = True
+        comment.delete()
+    else:
+        return HttpResponse("You can not delete other people's commentary!")
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

@@ -13,7 +13,7 @@ class ReviewForm(ModelForm):
 
     class Meta:
         model = Review
-        fields = ('name_comment', 'content', 'author')
+        fields = ('content', 'rating_average')
 
 
 

@@ -1,8 +1,11 @@
 {%  load static %}
+{% block script %} <script src="https://js.stripe.com/v3/"></script> {% endblock script%}
+{% load crispy_forms_tags %}
 {% block content %}
 {% include 'static_html/head.html' %}
 {% include 'static_html/header.html' %}
 {% include 'static_html/nav-panel.html' %}
+
     <!-- /nav_panel -->
 
     <main>
@@ -86,7 +89,7 @@
                         {% for image_room in room.photo_room.all %}
                         <div class="item">
                             <a data-fslightbox="gallery_1" data-type="image" href="{{image_room.add_photo.url}}">
-                                <img src="{{image_room.add_photo.url}}" alt="">
+                                <img src="{{image_room.add_photo.url}}" height="210" width="315" alt="">
                             </a>
                         </div>
                         {% endfor %}
@@ -173,9 +176,9 @@
                     <!-- /review_card -->
                     {% endfor %}
                     <div>
-                        <form method="post">
+                        <form method="post" action="{% url 'part_room:review' room.pk %}">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            {{ room_form.as_p }}
 
                             <button type="submit" class="text-end">Leave a review</button>
                         </form>
@@ -262,7 +265,7 @@
                         <p class="phone_element no_borders"><a href="tel://423424234"><i class="bi bi-telephone"></i><span><em>Info and bookings</em>+41 934 121 1334</span></a></p>
                     </div>
                 </div>
-                <di_v class="col-xl-7">
+                <div class="col-xl-7">
                     <div data-cue="slideInUp" data-delay="200">
                         {% comment %}
                         <form method="post" id="form" action="#">
@@ -308,11 +311,30 @@
 
                         </form>
                         {% endcomment %}
-                        <li><a href="{% url 'booking_detail' booking.id %}" class="btn_1 btn_scrollto">Book Now</a></li>
+                        <div class="card-deck">
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{room.name_room}}</h5>
+                                  <div class="card-text">
+                                    <h5 class="card-text">${{room.price }}</h5>
+                                    <form
+
+                                      method="POST"
+                                    >
+                                      {% csrf_token %}
+                                        {{ form|crispy }}
+
+                                      <input type="submit">Checkout
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
 
                         <!-- / row -->
                     </div>
-                </di_v>
+                </div>
                 <!-- /col -->
             </div>
             <!-- /row -->

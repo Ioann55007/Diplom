@@ -18,7 +18,10 @@ urlpatterns = [
     path('menu-3/', TemplateView.as_view(template_name='menu-3.html'), name='menu_3'),
     path('menu-4/', TemplateView.as_view(template_name='menu-4.html'), name='menu_4'),
     # path('contact-form/', views.contact_form, name='contact_form'),
-    path("booking/", views.Booking.as_view(), name="booking"),
+    # path("booking/", views.Booking.as_view(), name="booking"),
+    path("booking/", views.BookingListView.as_view(), name="booking"),
+    path("restaurant-list/", views.RestaurantListView.as_view(), name="restaurants"),
+    path("restaurant-detail/<slug:slug>/", views.RestaurantDetail.as_view(), name="restaurant"),
 
 ]
 
@@ -28,6 +31,8 @@ urlpatterns += [
         views.CreateStripeCheckoutSessionView.as_view(),
         name="create-checkout-session"),
     path("success/", views.SuccessView.as_view(), name="success"),
+    path("cancel/", views.CancelView.as_view(), name="cancel"),
+
     path("webhooks/stripe/", views.StripeWebhookView.as_view(), name="stripe-webhook"),
     path("booking/<int:pk>/", views.BookingHotelDetailView.as_view(), name="booking_detail")
 ]

@@ -1,4 +1,3 @@
-from profile import Profile
 
 from django.conf import settings
 from django.db import models
@@ -9,6 +8,8 @@ from django.utils import timezone
 from django.contrib.auth.models import PermissionsMixin, UserManager
 
 from the_profile.models import Profile
+
+from base_one.models import BookingHotel
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -36,9 +37,13 @@ class Room(models.Model):
     content = models.TextField()
     price = models.IntegerField()
     room_photo = models.ImageField(upload_to='', blank=True)
+    booking = models.ForeignKey(BookingHotel, on_delete=models.CASCADE, related_name='booking_room',
+                                null=True, blank=True)
+
 
     def __str__(self):
         return f"{self.name_room}"
+
 
     def get_absolute_url(self):
         return reverse('room-detail', kwargs={'id': self.name_room})

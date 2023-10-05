@@ -1,39 +1,15 @@
 {% comment %} templates/products/product_detail.html {% endcomment %}
 
-
-{% block title %} Booking {% endblock title%}
+{% block title %} Buy Product {% endblock title%}
 {% block script %} <script src="https://js.stripe.com/v3/"></script> {% endblock script%}
-{% load crispy_forms_tags %}
 {% block content %}
-<div class="card-deck">
-  {% if booking  %}
-  <div class="card">
-
-    <div class="card-body">
-      <h5 class="card-title">{{booking.room_booking}}</h5>
-      <div class="card-text">
-        <h5 class="card-text">${{ booking.room_booking.price }}</h5>
+<p>Fanks for you booking!</p>
         <form
           action="{% url 'create-checkout-session' booking.id %}"
           method="POST"
         >
           {% csrf_token %}
-          <button type="submit" class="btn btn-primary">Book Now</button>
+          <button type="submit" class="btn btn-primary">Checkout</button>
         </form>
-      </div>
-    </div>
-  </div>
-  {% endif %}
 
-</div>
-<div class="container mt-5 w-50">
-  <form id="contactForm" method="POST">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" name="contact-submit" class="btn btn-success btn-lg" />
-  </form>
-</div>
 {% endblock content %}
-
-
-

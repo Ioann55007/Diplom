@@ -22,6 +22,8 @@ class BookingForm(forms.ModelForm):
     room_booking = forms.ModelChoiceField(queryset=Room.objects.all(), label='Room')
     adults = forms.IntegerField()
     childs = forms.IntegerField()
+    quantity = forms.IntegerField()
+
 
     class Meta:
         model = BookingHotel

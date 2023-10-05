@@ -12,11 +12,30 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, DetailView
 from .forms import BookingForm
-from .models import BookingHotel
+from .models import BookingHotel, Restaurant
+from part_room.models import Room
+
+from the_profile.models import Profile
 
 # from .models import BookingHotel
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+class RestaurantListView(ListView):
+    template_name = 'static_html/restaurants.html'
+    context_object_name = 'restaurants'
+    model = Restaurant
+
+
+class RestaurantDetail(DetailView):
+    template_name = 'static_html/restaurant.html'
+    model = Restaurant
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['title'] = 'restaurant'
+        return context
 
 
 def error_page(request):
@@ -53,12 +72,23 @@ class Hom_ParalView(TemplateView):
     template_name = 'index-5.html'
 
 
+class BookingListView(ListView):
+    model = BookingHotel
+    context_object_name = "booking"
+    template_name = "booking_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        booking = BookingHotel.objects.last()
+        context['booking'] = booking
+        return context
+
+
 class BookingHotelDetailView(DetailView):
     model = BookingHotel
     context_object_name = "booking_in_hotel"
     template_name = "booking_detail.html"
     paginate_by = 1
-
 
     def get_context_data(self, **kwargs):
         context = super(BookingHotelDetailView, self).get_context_data()
@@ -68,25 +98,9 @@ class BookingHotelDetailView(DetailView):
 
         return context
 
-
-    def post(self, request, pk, *args, **kwargs):
-        # form = BookingForm()
-        # rooms_bookings = BookingHotel.objects.all()
-
-        # if request.method == "POST" and request.is_ajax():
-        if request.method == "POST":
-            form = BookingForm(request.POST)
-            if form.is_valid():
-                # form = form.save(commit=False)
-                # form.author.profile = self.request.user.id
-                form.save()
-
-                return redirect('booking_detail', pk)
-
-        else:
-            form = BookingForm()
-
-        return render(request, "booking_detail.html", {"form": form})
+    def form_valid(self, form):
+        form.instance.date_reg = timezone.now()
+        return super().form_valid(form)
 
 
 class CreateStripeCheckoutSessionView(View):
@@ -95,18 +109,17 @@ class CreateStripeCheckoutSessionView(View):
     """
 
     def post(self, request, *args, **kwargs):
-        # price = BookingHotel.sum
         booking = BookingHotel.objects.get(id=self.kwargs["pk"])
-
+        booking_sum = booking.adults * booking.childs
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=["card"],
             line_items=[
                 {
                     "price_data": {
                         "currency": "usd",
-                        "unit_amount": (booking.adults + booking.childs * booking.room_booking.price) * 100,
+                        "unit_amount": int(booking_sum * booking.price) * 100,
                         "product_data": {
-                            "name": booking.room_booking.name_room,
+                            "name": booking.price,
 
                         },
                     },
@@ -185,25 +198,10 @@ class AjaxMiddleware:
 class Booking(TemplateView):
     template_name = 'booking_detail.html'
 
-    # def post(self, request):
-    #     # form = BookingForm()
-    #     # rooms_bookings = BookingHotel.objects.all()
-    #
-    #     # if request.method == "POST" and request.is_ajax():
-    #     if request.method == "POST":
-    #         form = BookingForm(request.POST)
-    #         if form.is_valid():
-    #             # form = form.save(commit=False)
-    #             # form.author.profile = self.request.user.id
-    #             form.save()
-    #
-    #             return redirect('booking')
-    #
-    #     else:
-    #         form = BookingForm()
-    #
-    #     return render(request, "booking.html", {"form": form})
 
 
+
+class CancelView(TemplateView):
+    template_name = "cancel.html"
 
 

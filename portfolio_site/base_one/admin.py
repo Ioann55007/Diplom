@@ -1,14 +1,23 @@
 from django.contrib import admin
-from .models import ReviewHotel, BookingHotel
-
-
-@admin.register(ReviewHotel)
-class AdminReviewHotel(admin.ModelAdmin):
-    list_display = ('name_author', 'created', 'text_review')
-    list_display_links = ('name_author',)
+from .models import BookingHotel, Restaurant, PhotoDishRestaurant
 
 
 @admin.register(BookingHotel)
-class AdminBookingHotel(admin.ModelAdmin):
-    list_display = ('arrival_date', 'date_of_departure', 'room_booking', 'adults', 'childs')
-    list_display_links = ('room_booking',)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('user_booking', 'arrival_date', 'date_of_departure', 'adults', 'childs', 'quantity', 'price')
+    list_display_links = ('user_booking',)
+
+
+
+@admin.register(Restaurant)
+class RestaurantAdmin(admin.ModelAdmin):
+    list_display = ('title', 'photo', 'average_bill', 'description')
+    list_display_links = ('title',)
+    prepopulated_fields = {'slug': ('title',)}
+
+
+
+@admin.register(PhotoDishRestaurant)
+class RestaurantAdmin(admin.ModelAdmin):
+    list_display = ('restaurant', 'add_photo')
+    list_display_links = ('restaurant',)

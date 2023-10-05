@@ -1,0 +1,20 @@
+
+ {% block title %} Bookings {% endblock title%}
+ {% block content %}
+ {% if request.user.is_authenticated %}
+<p>Please click on this link for complete booking.</p>
+<div class="card" style="width: 18rem">
+
+  <div class="card-body">
+    <h5 class="card-title">{{booking.user_booking.last}}</h5>
+    <p class="card-text">{{booking.price.last}}</p>
+    <a
+      href="{% url 'booking_detail' booking.pk %}"
+      class="btn btn-primary"
+      >View Detail</a>
+
+  </div>
+</div>
+ {% endif %}
+
+ {% endblock content %}
