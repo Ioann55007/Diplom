@@ -3,7 +3,7 @@
 <footer class="revealed">
         <div class="footer_bg">
             <div class="gradient_over"></div>
-            <div class="background-image" data-background="url({% static 'img/rooms/3.jpg' %})"></div>
+            <div class="background-image" data-background=""></div>
         </div>
         <div class="container">
             <div class="row move_content">
@@ -25,22 +25,8 @@
                             <li><a href="{% url 'about' %}">About Us</a></li>
                             <li><a href="{% url 'part_room:rooms_list_one' %}">Rooms &amp; Suites</a></li>
                             <li><a href="{% url 'part_post:news-1' %}">News &amp; Events</a></li>
-                            <li><a href="{% url 'contacts' %}">Contacts</a></li>
-                            <li><a href="{% url 'about' %}">Terms and Conditions</a></li>
+                            <li><a href="{% url 'contact_form' %}">Contacts</a></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div id="newsletter">
-                        <h5>Newsletter</h5>
-                        <div id="message-newsletter"></div>
-                        <form method="post" action="phpmailer/newsletter_template_email.php" name="newsletter_form" id="newsletter_form">
-                            <div class="form-group">
-                                <input type="email" name="email_newsletter" id="email_newsletter" class="form-control" placeholder="Your email">
-                                <button type="submit" id="submit-newsletter"><i class="bi bi-send"></i></button>
-                            </div>
-                        </form>
-                        <p>Receive latest offers and promos without spam. You can cancel anytime.</p>
                     </div>
                 </div>
             </div>

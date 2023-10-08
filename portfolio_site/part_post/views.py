@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import DetailView, ListView, CreateView
+from django.core.paginator import Paginator
 
 from .forms import CommentForm
 from .models import NewPost, Comment
@@ -13,6 +14,7 @@ class NewsOneView(ListView):
     template_name = 'news-1.html'
     context_object_name = 'posts'
     model = NewPost
+    paginate_by = 1
 
 
 
@@ -22,6 +24,7 @@ class NewsOneView(ListView):
 def news_detail(request, slug):
     """Вывод полной статьи
     """
+    pagination_by = 2
     post = get_object_or_404(NewPost, slug=slug)
     comments = Comment.objects.all()
     if request.method == "POST":
@@ -38,6 +41,7 @@ def news_detail(request, slug):
     return render(request, "news-post.html",
                   {"post": post,
                    "comments": comments,
+                   "pagination": pagination_by,
                    "form": form})
 
 

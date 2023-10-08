@@ -5,17 +5,17 @@ from .models import Room, Review, DoubleRoom, DeluxeRoom, SuperiorRoom, PhotoDet
 
 @admin.register(DoubleRoom)
 class AdminDoubleRoom(admin.ModelAdmin):
-    list_display = ('price', 'add_photo', 'room')
+    list_display = ('price', 'add_photo', 'room', 'content')
 
 
 @admin.register(DeluxeRoom)
 class AdminDeluxeRoom(admin.ModelAdmin):
-    list_display = ('price', 'add_photo', 'room')
+    list_display = ('price', 'add_photo', 'room', 'content')
 
 
 @admin.register(SuperiorRoom)
 class AdminSuperiorRoom(admin.ModelAdmin):
-    list_display = ('price', 'add_photo', 'room')
+    list_display = ('price', 'add_photo', 'room', 'content')
 
 
 @admin.register(Room)

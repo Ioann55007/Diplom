@@ -1,4 +1,3 @@
-
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -10,6 +9,7 @@ from django.contrib.auth.models import PermissionsMixin, UserManager
 from the_profile.models import Profile
 
 from base_one.models import BookingHotel
+from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -24,6 +24,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     avatar = models.ImageField(settings.AUTH_USER_MODEL, default='/No-Image-Available.jpg', blank=True)
     USERNAME_FIELD = 'username'
+    is_verify_email = models.BooleanField(default=False, verbose_name="Подтверждение электронной почты")
 
     REQUIRED_FIELDS = ['email', 'password', 'avatar', 'phone']
 
@@ -40,10 +41,8 @@ class Room(models.Model):
     booking = models.ForeignKey(BookingHotel, on_delete=models.CASCADE, related_name='booking_room',
                                 null=True, blank=True)
 
-
     def __str__(self):
         return f"{self.name_room}"
-
 
     def get_absolute_url(self):
         return reverse('room-detail', kwargs={'id': self.name_room})
@@ -65,6 +64,7 @@ class DoubleRoom(models.Model):
     add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room_double',
                              verbose_name='Номер в гостинице')
+    content = models.TextField()
 
     class Meta:
         verbose_name = 'изображение Double Room'
@@ -77,6 +77,7 @@ class DeluxeRoom(models.Model):
     add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='deluxe_room',
                              verbose_name='Номер в гостинице')
+    content = models.TextField()
 
     class Meta:
         verbose_name = 'изображение Deluxe Room'
@@ -88,6 +89,7 @@ class SuperiorRoom(models.Model):
     add_photo = models.ImageField(upload_to="image_room/", verbose_name='Фото')
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='superior_room',
                              verbose_name='Номер в гостинице')
+    content = models.TextField()
 
     class Meta:
         verbose_name = 'изображение Superior Room'
@@ -105,5 +107,9 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.author}, {self.room}"
+
+
+
+
 
 

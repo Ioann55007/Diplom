@@ -3,6 +3,7 @@ from django.db import models
 from the_profile.models import Profile
 
 
+
 class ReviewHotel(models.Model):
     objects = models.Manager()
     name_author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='name_author')
@@ -43,3 +44,18 @@ class PhotoDishRestaurant(models.Model):
     class Meta:
         verbose_name = 'dish'
         verbose_name_plural = 'Dishes'
+
+
+
+class ContactModel(models.Model):
+    name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=100)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+

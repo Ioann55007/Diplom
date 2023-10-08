@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, CreateView
 import stripe
 from django.conf import settings
 from django.core.mail import send_mail
@@ -11,13 +12,12 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, DetailView
-from .forms import BookingForm
+from .forms import BookingForm, ContactForm
 from .models import BookingHotel, Restaurant
 from part_room.models import Room
 
 from the_profile.models import Profile
 
-# from .models import BookingHotel
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -58,18 +58,6 @@ class IndexTwo(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'about.html'
-
-
-class FlexSliderView(TemplateView):
-    template_name = "index-3.html"
-
-
-class YouVim(TemplateView):
-    template_name = 'index-4.html'
-
-
-class Hom_ParalView(TemplateView):
-    template_name = 'index-5.html'
 
 
 class BookingListView(ListView):
@@ -138,48 +126,91 @@ class SuccessView(TemplateView):
     template_name = "success.html"
 
 
-@method_decorator(csrf_exempt, name="dispatch")
-class StripeWebhookView(View):
-    """
-    Stripe webhook view to handle checkout session completed event.
-    """
+# @method_decorator(csrf_exempt, name="dispatch")
+# class StripeWebhookView(View):
+#     """
+#     Stripe webhook view to handle checkout session completed event.
+#     """
+#
+#     def post(self, request, format=None):
+#         payload = request.body
+#         endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
+#         sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
+#         event = None
+#
+#         try:
+#             event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
+#         except ValueError as e:
+#             # Invalid payload
+#             return HttpResponse(status=400)
+#         except stripe.error.SignatureVerificationError as e:
+#             # Invalid signature
+#             return HttpResponse(status=400)
+#
+#         if event["type"] == "checkout.session.completed":
+#             print("Payment successful")
+#
+#             # Add this
+#             session = event["data"]["object"]
+#             customer_email = session["customer_details"]["email"]
+#             booking_id = session["metadata"]["booking_id"]
+#             booking = get_object_or_404(BookingHotel, id=booking_id)
+#
+#             send_mail(
+#                 subject="Here is your product",
+#                 message=f"Thanks for your purchase. The URL is: {booking.url}",
+#                 recipient_list=[customer_email],
+#                 from_email="ioann.basic@gmail.com",
+#             )
+#             PaymentHistory.objects.create(
+#                 email=customer_email, room=room, payment_status="completed",
+#
+#             Can handle other events here.
+#
+#             return HttpResponse(st
 
-    def post(self, request, format=None):
-        payload = request.body
-        endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
-        sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
-        event = None
-
-        try:
-            event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
-        except ValueError as e:
-            # Invalid payload
-            return HttpResponse(status=400)
-        except stripe.error.SignatureVerificationError as e:
-            # Invalid signature
-            return HttpResponse(status=400)
-
-        if event["type"] == "checkout.session.completed":
-            print("Payment successful")
-
-            # Add this
-            session = event["data"]["object"]
-            customer_email = session["customer_details"]["email"]
-            booking_id = session["metadata"]["booking_id"]
-            booking = get_object_or_404(BookingHotel, id=booking_id)
-
-            send_mail(
-                subject="Here is your product",
-                message=f"Thanks for your purchase. The URL is: {booking.url}",
-                recipient_list=[customer_email],
-                from_email="ioann.basic@gmail.com",
-            )
-            # PaymentHistory.objects.create(
-            #     email=customer_email, product=product, payment_status="completed"
-
-            # Can handle other events here.
-
-            return HttpResponse(status=200)
+# @method_decorator(csrf_exempt, name="dispatch")
+# class StripeWebhookView(View):
+#     """
+#     Stripe webhook view to handle checkout session completed event.
+#     """
+#
+#     def post(self, request, format=None):
+#         payload = request.body
+#         endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
+#         sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
+#         event = None
+#
+#         try:
+#             event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
+#         except ValueError as e:
+#             # Invalid payload
+#             return HttpResponse(status=400)
+#         except stripe.error.SignatureVerificationError as e:
+#             # Invalid signature
+#             return HttpResponse(status=400)
+#
+#         if event["type"] == "checkout.session.completed":
+#             print("Payment successful")
+#             session = event["data"]["object"]
+#             customer_email = session["customer_details"]["email"]
+#             room_id = session["metadata"]["room_id"]
+#             room = get_object_or_404(Room, id=room_id)
+#
+#             send_mail(
+#                 subject="Here is your product",
+#                 message=f"Thanks for your purchase. The URL is: {room.url}",
+#                 recipient_list=[customer_email],
+#                 from_email="ioann.basic@gmail.com",
+#             )
+#
+#             PaymentHistory.objects.create(
+#                 email=customer_email, room=room, payment_status="completed"
+#             )  # Add this
+#
+#         # Can handle other events here.
+#
+#         return HttpResponse(status=200)
 
 
 class AjaxMiddleware:
@@ -199,9 +230,15 @@ class Booking(TemplateView):
     template_name = 'booking_detail.html'
 
 
-
-
 class CancelView(TemplateView):
     template_name = "cancel.html"
 
 
+class ContactCreateView(CreateView):
+    form_class = ContactForm
+    template_name = 'contacts.html'
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        form.instance.initiator = self.request.user
+        return super().form_valid(form)

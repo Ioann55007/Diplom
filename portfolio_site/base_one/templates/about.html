@@ -2,6 +2,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% include 'static_html/header-2.html' %}
+{% include 'static_html/nav-panel.html' %}
 
     <main>
       <div class="hero small-height jarallax" data-jarallax data-speed="0.2">
@@ -182,7 +183,7 @@
                   </div>
                   <p>Can’t find your question in the list?
                       Let us know your questions.</p>
-                  <p><a href="{% url 'contacts' %}" class="animated_link"><strong>Contact Us <i class="bi bi-arrow-right"></i></strong></a></p>
+                  <p><a href="{% url 'contact_form' %}" class="animated_link"><strong>Contact Us <i class="bi bi-arrow-right"></i></strong></a></p>
               </div>
               <div class="col-lg-7">
                   <div role="tablist" class="mb-5 accordion" id="faq">

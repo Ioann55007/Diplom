@@ -101,53 +101,6 @@
 
         <div class="container margin_120_95" id="reviews">
             <div class="row justify-content-between">
-                <div class="col-lg-4 order-lg-2 fixed_title reviews_sum_details">
-                    <div class="title">
-                        <small>Paradise Hotel</small>
-                        <h2>Reviews</h2>
-                    </div>
-                    <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.</p>
-                    <h6>Comfort</h6>
-                    <div class="row mb-2">
-                        <div class="col-xl-10 col-lg-9 col-11">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-1"><strong>9.0</strong></div>
-                    </div>
-                    <!-- /row -->
-                    <h6>Facilities</h6>
-                    <div class="row mb-2">
-                        <div class="col-xl-10 col-lg-9 col-11">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-1"><strong>9.5</strong></div>
-                    </div>
-                    <!-- /row -->
-                    <h6>Location</h6>
-                    <div class="row mb-2">
-                        <div class="col-xl-10 col-lg-9 col-11">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-1"><strong>6.0</strong></div>
-                    </div>
-                    <!-- /row -->
-                    <h6>Price</h6>
-                    <div class="row mb-2">
-                        <div class="col-xl-10 col-lg-9 col-11">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-1"><strong>6.0</strong></div>
-                    </div>
-                    <!-- /row -->
-                </div>
                 <div class="col-lg-7 order-lg-1">
                     {% if user.is_authenticated %}
 
@@ -202,9 +155,10 @@
                     </div>
                     <div class="row" data-cues="slideInUp" data-delay="800">
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <a href="room-list-1.html" class="box_cat_rooms">
+                            {% for room in room.room_double.all %}
+
+                            <a href="{% url 'part_room:double_room_detail' room.pk %}" class="box_cat_rooms">
                                 <figure>
-                                    {% for room in room.room_double.all %}
 
                                     <div class="background-image" data-background="url({{room.add_photo.url}})"></div>
                                     <div class="info">
@@ -218,9 +172,10 @@
                             </a>
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <a href="room-list-1.html" class="box_cat_rooms">
+                            {% for room in room.deluxe_room.all %}
+
+                            <a href="{% url 'part_room:deluxe_room_detail' room.pk %}" class="box_cat_rooms">
                                 <figure>
-                                    {% for room in room.deluxe_room.all %}
 
                                     <div class="background-image" data-background="url({{room.add_photo.url}})"></div>
                                     <div class="info">
@@ -233,12 +188,13 @@
                             </a>
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                            <a href="room-list-1.html" class="box_cat_rooms">
+                            {% for room in room.superior_room.all %}
+
+                            <a href="{% url 'part_room:superior_room_detail' room.pk %}" class="box_cat_rooms">
                                 <figure>
-                                    {% for room in room.superior_room.all %}
                                     <div class="background-image" data-background="url({{room.add_photo.url}})"></div>
                                     <div class="info">
-                                        <small>From $240/night</small>
+                                        <small>From ${{ room.price }}/night</small>
                                         <h3>Superior Room</h3>
                                         <span>Read more</span>
                                     </div>
@@ -267,50 +223,8 @@
                 </div>
                 <div class="col-xl-7">
                     <div data-cue="slideInUp" data-delay="200">
-                        {% comment %}
-                        <form method="post" id="form" action="#">
-                            {% csrf_token %}
-                        <div class="booking_wrapper">
-                            <p id="daterangepicker-result" class="d-none"></p>
-                            <input name="calendar" value="cal_endar" id="date_booking" type="hidden">
-                            <div id="daterangepicker-embedded-container" class="embedded-daterangepicker clearfix mb-4"></div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="custom_select">
-                                        <select name="select" class="wide">
-                                            <option value="choise_room">Select Room</option>
-                                            <option value="double">Double Room</option>
-                                            <option value="deluxe">Deluxe Room</option>
-                                            <option value="superior">Superior Room</option>
-                                            <option value="junior">Junior Suite</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="qty-buttons mb-3 version_2">
-                                                <input type="button" value="+" class="qtyplus" name="adults_booking">
-                                                <input type="text" name="adults_booking" id="adults_booking" value="adults" class="qty form-control" placeholder="Adults">
-                                                <input type="button" value="adults" class="qtyminus" name="adults_booking">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="mb-3 qty-buttons mb-3 version_2">
-                                                <input type="button" value="+" class="qtyplus" name="childs_booking">
-                                                <input type="text" name="childs_booking" id="childs_booking" value="" class="qty form-control" placeholder="Childs">
-                                                <input type="button" value="childs" class="qtyminus" name="childs_booking">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                            <button type="submit" class="text-end mt-5">
-                                                        Book Now</button>
+                        {% if request.user.is_authenticated %}
 
-                        </form>
-                        {% endcomment %}
                         <div class="card-deck">
                             <div class="card">
                                 <div class="card-body">
@@ -331,7 +245,9 @@
                               </div>
 
                             </div>
-
+                        {% else %}
+                        <p>Please register at this site that booking in hotel.</p>
+                        {% endif %}
                         <!-- / row -->
                     </div>
                 </div>

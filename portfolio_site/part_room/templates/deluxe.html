@@ -1,0 +1,133 @@
+
+
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% include 'static_html/head.html' %}
+{% include 'static_html/header.html' %}
+{% include 'static_html/nav-panel.html' %}
+
+    <!-- /nav_panel -->
+
+    <main>
+
+        <div class="hero full-height jarallax" data-jarallax data-speed="0.2">
+            <img class="jarallax-img kenburns" src="{{ room.add_photo.url }}" alt="">
+            <div class="wrapper opacity-mask d-flex align-items-center  text-center animate_hero" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <small class="slide-animated one">Luxury Hotel Experience</small>
+                            <h1 class="slide-animated two">DOUBLE ROOM</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="mouse_wp slide-animated four">
+                    <a href="#first_section" class="btn_explore">
+                        <div class="mouse"></div>
+                    </a>
+                </div>
+                <!-- / mouse -->
+            </div>
+        </div>
+        <!-- /Background Img Parallax -->
+
+        <div class="bg_white" id="first_section">
+            <div class="container margin_120_95">
+                <div class="row justify-content-between">
+                    <div class="col-lg-4">
+                        <div class="title">
+                            <h2>Luxury Experience</h2>
+                        </div>
+                        <p>{{ room.content }}</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="room_facilities_list">
+                            <ul data-cues="slideInLeft">
+                                <li><i class="icon-hotel-double_bed_2"></i> King Size Bed</li>
+                                <li><i class="icon-hotel-safety_box"></i> Safety Box</li>
+                                <li><i class="icon-hotel-patio"></i>Balcony</li>
+                                <li><i class="icon-hotel-tv"></i> 32 Inch TV</li>
+                                <li><i class="icon-hotel-disable"></i> Disable Access</li>
+                                <li><i class="icon-hotel-dog"></i> Pet Allowed</li>
+                                <li><i class="icon-hotel-bottle"></i> Welcome Bottle</li>
+                                <li><i class="icon-hotel-wifi"></i> Wifi / Netflix access</li>
+                                <li><i class="icon-hotel-hairdryer"></i> Air Dryer</li>
+                                <li><i class="icon-hotel-condition"></i> Air Condition</li>
+                                <li><i class="icon-hotel-loundry"></i>Loundry Service</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /bg_white -->
+
+
+        <!-- /bg_white -->
+          <div class="bg_white add_bottom_120">
+            <div class="container-fluid p-lg-0">
+                <div data-cues="zoomIn">
+                    <div class="owl-carousel owl-theme carousel_item_centered kenburns rounded-img">
+                        {% for image_room in room.photo_room.all %}
+                        <div class="item">
+                            <a data-fslightbox="gallery_1" data-type="image" href="{{image_room.add_photo.url}}">
+                                <img src="{{image_room.add_photo.url}}" height="210" width="315" alt="">
+                            </a>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- /reviews -->
+
+
+        <!-- /bg_white -->
+
+        <!-- /container -->
+    </main>
+
+   {% include 'static_html/footer.html' %}
+    <!-- /footer -->
+
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+        </svg>
+    </div>
+    <!-- /back to top -->
+
+
+<!-- COMMON SCRIPTS -->
+<script src="{% static 'js/common_scripts.js' %}"></script>
+<script src="{% static 'js/common_functions.js' %}"></script>
+<script src="{% static 'js/datepicker_inline.js' %}"></script>
+<script src="{% static 'phpmailer/validate.js' %}"></script>
+<script src="{% static 'custom_js/may.js' %}"></script>
+<script>
+    // Progress bars animation
+    $(function() {
+        "use strict";
+        var $section = $('#reviews');
+        $(window).on('scroll', function(ev) {
+            var scrollOffset = $(window).scrollTop();
+            var containerOffset = $section.offset().top - window.innerHeight;
+            if (scrollOffset > containerOffset) {
+                $(".progress-bar").each(function() {
+                    var each_bar_width = $(this).attr('aria-valuenow');
+                    $(this).width(each_bar_width + '%');
+                });
+            }
+        });
+    });
+</script>
+
+
+
+{% endblock %}

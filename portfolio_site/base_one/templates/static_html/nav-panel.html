@@ -11,23 +11,24 @@
                          <ul class="level-2">
                             <li class="back"><a href="#0">Back</a></li>
                             <li><a href="{% url 'index' %}">Home Video Bg</a></li>
-                            <li><a href="{% url 'carousel' %}">Home Carousel</a></li>
-                            <li><a href="{% url 'flex_slider' %}">Home FlexSlider</a></li>
-                            <li><a href="{% url 'you-vim' %}">Home Youtube/Vimeo</a></li>
-                            <li><a href="{% url 'hom-palal' %}">Home Parallax</a></li>
+
                         </ul>
                     </li>
                     <li class="parent"><a href="#0">Rooms & Suites</a>
                         <ul class="level-2">
                             <li class="back"><a href="#0">Back</a></li>
                             <li><a href="{%  url 'part_room:rooms_list_one' %}">Room list</a></li>
-                            <li><a href="room-details-booking.html">Working Booking Request</a></li>
                         </ul>
                     </li>
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'part_post:news-1' %}">News & events</a></li>
-                    <li><a href="{% url 'contacts' %}">Contact</a></li>
-                    <li><a href="{% url 'error_page' %}">Error Page</a></li>
+                    <li><a href="{% url 'contact_form' %}">Contact</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    {% if request.user.is_authenticated %}
+
+                    <li><a href="{% url 'profile' user.profile.pk %}">Profile</a></li>
+                    <li><a href="{% url 'logout'  %}">Logout</a></li>
+                    {% endif %}
                 </ul>
                 <div class="panel_footer">
                     <div class="phone_element"><a href="tel://423424234"><i class="bi bi-telephone"></i><span><em>Info and bookings</em>+41 934 121 1334</span></a></div>
