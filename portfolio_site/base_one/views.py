@@ -1,23 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import View
-from django.views.generic import TemplateView, DetailView, CreateView
+from django.views.generic import CreateView
 import stripe
 from django.conf import settings
-from django.core.mail import send_mail
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.utils import timezone
-from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, DetailView
-from .forms import BookingForm, ContactForm
+from .forms import ContactForm
 from .models import BookingHotel, Restaurant
-from part_room.models import Room
-
-from the_profile.models import Profile
-
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -53,9 +44,6 @@ class IndexTwo(TemplateView):
     template_name = "index-2.html"
 
 
-# class AboutView(TemplateView):
-#     template_name = "about.html"
-
 class AboutView(TemplateView):
     template_name = 'about.html'
 
@@ -80,8 +68,6 @@ class BookingHotelDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(BookingHotelDetailView, self).get_context_data()
-        # context["bookings"] = BookingHotel.objects.filter(room_booking=self.get_object())
-        # context["bookings"] = BookingHotel.objects.all()
         context["booking"] = BookingHotel.objects.get(id=self.kwargs["pk"])
 
         return context
@@ -126,99 +112,12 @@ class SuccessView(TemplateView):
     template_name = "success.html"
 
 
-# @method_decorator(csrf_exempt, name="dispatch")
-# class StripeWebhookView(View):
-#     """
-#     Stripe webhook view to handle checkout session completed event.
-#     """
-#
-#     def post(self, request, format=None):
-#         payload = request.body
-#         endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
-#         sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
-#         event = None
-#
-#         try:
-#             event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
-#         except ValueError as e:
-#             # Invalid payload
-#             return HttpResponse(status=400)
-#         except stripe.error.SignatureVerificationError as e:
-#             # Invalid signature
-#             return HttpResponse(status=400)
-#
-#         if event["type"] == "checkout.session.completed":
-#             print("Payment successful")
-#
-#             # Add this
-#             session = event["data"]["object"]
-#             customer_email = session["customer_details"]["email"]
-#             booking_id = session["metadata"]["booking_id"]
-#             booking = get_object_or_404(BookingHotel, id=booking_id)
-#
-#             send_mail(
-#                 subject="Here is your product",
-#                 message=f"Thanks for your purchase. The URL is: {booking.url}",
-#                 recipient_list=[customer_email],
-#                 from_email="ioann.basic@gmail.com",
-#             )
-#             PaymentHistory.objects.create(
-#                 email=customer_email, room=room, payment_status="completed",
-#
-#             Can handle other events here.
-#
-#             return HttpResponse(st
-
-# @method_decorator(csrf_exempt, name="dispatch")
-# class StripeWebhookView(View):
-#     """
-#     Stripe webhook view to handle checkout session completed event.
-#     """
-#
-#     def post(self, request, format=None):
-#         payload = request.body
-#         endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
-#         sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
-#         event = None
-#
-#         try:
-#             event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
-#         except ValueError as e:
-#             # Invalid payload
-#             return HttpResponse(status=400)
-#         except stripe.error.SignatureVerificationError as e:
-#             # Invalid signature
-#             return HttpResponse(status=400)
-#
-#         if event["type"] == "checkout.session.completed":
-#             print("Payment successful")
-#             session = event["data"]["object"]
-#             customer_email = session["customer_details"]["email"]
-#             room_id = session["metadata"]["room_id"]
-#             room = get_object_or_404(Room, id=room_id)
-#
-#             send_mail(
-#                 subject="Here is your product",
-#                 message=f"Thanks for your purchase. The URL is: {room.url}",
-#                 recipient_list=[customer_email],
-#                 from_email="ioann.basic@gmail.com",
-#             )
-#
-#             PaymentHistory.objects.create(
-#                 email=customer_email, room=room, payment_status="completed"
-#             )  # Add this
-#
-#         # Can handle other events here.
-#
-#         return HttpResponse(status=200)
-
-
 class AjaxMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):
-        def is_ajax(self):
+        def is_ajax():
             return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
         request.is_ajax = is_ajax.__get__(request)

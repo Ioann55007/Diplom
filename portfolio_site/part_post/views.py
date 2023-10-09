@@ -1,10 +1,8 @@
 from the_profile.models import Profile
 
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views import View
-from django.views.generic import DetailView, ListView, CreateView
-from django.core.paginator import Paginator
+from django.views.generic import ListView
 
 from .forms import CommentForm
 from .models import NewPost, Comment
@@ -15,10 +13,6 @@ class NewsOneView(ListView):
     context_object_name = 'posts'
     model = NewPost
     paginate_by = 1
-
-
-
-
 
 
 def news_detail(request, slug):
@@ -43,9 +37,6 @@ def news_detail(request, slug):
                    "comments": comments,
                    "pagination": pagination_by,
                    "form": form})
-
-
-
 
 
 def comment_delete(request, id):
