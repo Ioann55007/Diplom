@@ -26,7 +26,6 @@ urlpatterns = [
     path('', include('base_one.urls')),
     path('', include('part_post.urls', namespace='part_post'),),
     path('', include('part_room.urls')),
-    path('', include('paymants.urls')),
     path('', include('the_profile.urls')),
     path("reset-password/", auth_views.PasswordResetView.as_view(template_name="reset_password.html"),
          name='reset_password'),

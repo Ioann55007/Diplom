@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'part_post.apps.PartSecondConfig',
     'part_room.apps.PartRoomConfig',
     'the_profile.apps.TheProfileConfig',
-    'paymants.apps.PaymantsConfig',
     'crispy_forms',
     'crispy_bootstrap4',
 
